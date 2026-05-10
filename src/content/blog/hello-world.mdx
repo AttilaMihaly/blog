@@ -1,0 +1,18 @@
+---
+title: "Hello World"
+description: "My first blog post, with an interactive React counter demonstrating Astro islands."
+pubDate: "2026-05-10"
+---
+
+import Counter from '../../components/Counter.tsx';
+
+Welcome to the blog! This is the first post, written in MDX.
+
+## Islands Architecture Demo
+
+The counter below is an interactive React component running as an Astro island — only
+this component ships JavaScript to the browser, while the rest of the page is static HTML.
+
+<Counter client:load />
+
+Try clicking the buttons — it updates instantly without a full page reload.
