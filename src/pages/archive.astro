@@ -1,0 +1,201 @@
+---
+import { getCollection } from 'astro:content';
+import Masthead from '../components/Masthead.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import '../styles/global.css';
+
+const allPosts = await getCollection('blog');
+allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Group by year
+const byYear = new Map<number, typeof allPosts>();
+for (const post of allPosts) {
+  const y = post.data.pubDate.getFullYear();
+  if (!byYear.has(y)) byYear.set(y, []);
+  byYear.get(y)!.push(post);
+}
+const years = [...byYear.keys()].sort((a, b) => b - a);
+
+// Total token count
+function parseTokens(s?: string) {
+  if (!s) return 0;
+  return parseInt(s.replace(/,/g, ''), 10) || 0;
+}
+const totalTokens = allPosts.reduce((sum, p) => sum + parseTokens(p.data.tokens), 0);
+const fmtTotal = totalTokens.toLocaleString('en-US');
+
+function fmtShort(d: Date) {
+  return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+}
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Archive — The Invariable Difference</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body class="dir-b">
+  <Masthead currentPage="archive" />
+
+  <main class="archive-main">
+    <!-- Header -->
+    <section class="archive-hero">
+      <div class="eyebrow accent" style="margin-bottom: 14px;">
+        Archive · {allPosts.length} entries · 2010 — 2026
+      </div>
+      <h1 class="display italic archive-hero__title">The complete index</h1>
+      <p class="display italic archive-hero__sub">
+        dispatches in reverse chronological order
+      </p>
+    </section>
+
+    <div class="rule"></div>
+
+    <!-- Filter tabs -->
+    <section class="archive-tabs">
+      <div class="archive-tabs__inner">
+        <span class="archive-tab archive-tab--active">By year</span>
+        <a href="#" class="archive-tab">By topic</a>
+        <a href="#" class="archive-tab">By kind</a>
+        <a href="#" class="archive-tab">By token count</a>
+        <span class="archive-tabs__total">
+          Total: <span class="num" style="color: var(--ink);">{fmtTotal}</span> tokens read
+        </span>
+      </div>
+    </section>
+
+    <!-- Entries by year -->
+    {years.map((year) => (
+      <section class="archive-year" key={year}>
+        <div class="archive-year__grid">
+          <div class="display italic archive-year__label">{String(year).slice(2)}</div>
+          <div>
+            <div class="eyebrow" style="margin-bottom: 18px;">{year} · {byYear.get(year)!.length} {byYear.get(year)!.length === 1 ? 'entry' : 'entries'}</div>
+            {byYear.get(year)!.map((p) => (
+              <div class="archive-entry" key={p.id}>
+                <span class="mono archive-entry__n">{p.data.issue ? `Nº ${p.data.issue}` : '—'}</span>
+                <span class="mono archive-entry__date">{fmtShort(p.data.pubDate)}</span>
+                <a href={`/blog/${p.id}`} class="display archive-entry__title">{p.data.title}</a>
+                <span class="eyebrow">{p.data.kicker ?? 'Post'}</span>
+                <span class="mono archive-entry__tokens">{p.data.tokens ? `${p.data.tokens} tok` : ''}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    ))}
+
+    <!-- Earlier years stub -->
+    <section class="archive-year archive-year--earlier">
+      <div class="archive-year__grid">
+        <div class="display italic archive-year__label archive-year__label--muted">10–23</div>
+        <div>
+          <div class="eyebrow" style="margin-bottom: 14px;">Earlier years · writing in progress</div>
+          <p class="display italic" style="font-size: 19px; line-height: 1.5; color: var(--muted); max-width: 540px;">
+            Earlier entries are being migrated from the previous archive. A few I would no longer write
+            the same way. I have not edited them.
+          </p>
+          <a href="#" class="eyebrow" style="display: inline-block; margin-top: 16px; border-bottom: 1px solid var(--rule-soft);">Browse earlier years →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</body>
+</html>
+
+<style>
+.archive-main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 64px;
+}
+.archive-hero {
+  padding: 40px 0 28px;
+  text-align: center;
+}
+.archive-hero__title {
+  font-size: 80px;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+}
+.archive-hero__sub {
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 540px;
+  margin: 14px auto 0;
+}
+.archive-tabs { padding: 28px 0; }
+.archive-tabs__inner {
+  display: flex;
+  gap: 24px;
+  align-items: baseline;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.archive-tab {
+  color: var(--muted);
+  padding-bottom: 6px;
+  border-bottom: none;
+}
+.archive-tab--active {
+  color: var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+.archive-tabs__total {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 10.5px;
+}
+.archive-year {
+  padding: 24px 0 32px;
+  border-top: 1px solid var(--ink);
+}
+.archive-year--earlier { border-top-color: var(--rule-soft); }
+.archive-year__grid {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 56px;
+}
+.archive-year__label {
+  font-size: 80px;
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+  color: var(--accent);
+  position: sticky;
+  top: 24px;
+  align-self: start;
+}
+.archive-year__label--muted { color: var(--muted); }
+.archive-entry {
+  display: grid;
+  grid-template-columns: 68px 68px 1fr 90px 80px;
+  gap: 16px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.archive-entry__n    { color: var(--muted); font-size: 12px; }
+.archive-entry__date { color: var(--muted); font-size: 12px; }
+.archive-entry__title {
+  font-size: 21px;
+  line-height: 1.2;
+  letter-spacing: -0.018em;
+  border-bottom: none;
+}
+.archive-entry__title:hover { color: var(--accent); }
+.archive-entry__tokens {
+  color: var(--muted);
+  font-size: 11.5px;
+  text-align: right;
+}
+</style>

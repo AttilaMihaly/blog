@@ -7,6 +7,11 @@ const blog = defineCollection({
     title: z.string(),
     description: z.string(),
     pubDate: z.coerce.date(),
+    dek: z.string().optional(),
+    kicker: z.string().optional(),
+    tokens: z.string().optional(),
+    readTime: z.string().optional(),
+    issue: z.string().optional(),
   }),
 });
 

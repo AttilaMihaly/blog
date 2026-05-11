@@ -1,0 +1,68 @@
+---
+---
+
+<figure class="dtable">
+  <figcaption class="eyebrow accent dtable__caption">Table I · Where the reasoning lives</figcaption>
+  <table class="dtable__table">
+    <thead>
+      <tr>
+        <th class="eyebrow dtable__th">Approach</th>
+        <th class="eyebrow dtable__th">Where reasoning lives</th>
+        <th class="eyebrow dtable__th dtable__th--narrow">Inspectable</th>
+        <th class="eyebrow dtable__th dtable__th--narrow">Portable</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="display italic dtable__approach">Prompting</td>
+        <td class="mono dtable__td">Vendor model</td>
+        <td class="mono dtable__td">—</td>
+        <td class="mono dtable__td">—</td>
+      </tr>
+      <tr>
+        <td class="display italic dtable__approach">RAG</td>
+        <td class="mono dtable__td">Vendor model + your docs</td>
+        <td class="mono dtable__td">partial</td>
+        <td class="mono dtable__td">partial</td>
+      </tr>
+      <tr>
+        <td class="display italic dtable__approach">Fine-tune</td>
+        <td class="mono dtable__td">Vendor weights</td>
+        <td class="mono dtable__td">—</td>
+        <td class="mono dtable__td">—</td>
+      </tr>
+      <tr class="dtable__row--highlight">
+        <td class="display italic dtable__approach">Specs &amp; decision tables</td>
+        <td class="mono dtable__td">Your repository</td>
+        <td class="mono dtable__td accent">yes</td>
+        <td class="mono dtable__td accent">yes</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+<style>
+.dtable { max-width: 800px; margin: 36px auto 24px; }
+.dtable__caption { display: block; margin-bottom: 12px; }
+.dtable__table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.dtable__th {
+  text-align: left;
+  padding: 10px 14px;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+.dtable__th--narrow { width: 90px; }
+.dtable__approach {
+  padding: 14px;
+  font-size: 17px;
+  border-bottom: 1px solid var(--rule-soft);
+  font-style: italic;
+}
+.dtable__td {
+  padding: 14px;
+  border-bottom: 1px solid var(--rule-soft);
+  font-size: 12.5px;
+}
+.dtable__row--highlight .dtable__approach,
+.dtable__row--highlight .dtable__td { border-bottom-color: var(--ink); }
+</style>

@@ -1,0 +1,57 @@
+---
+---
+
+<figure class="scale-fig">
+  <div class="scale-fig__box">
+    <div class="eyebrow accent" style="margin-bottom: 18px; text-align: center;">Figure I · A rounding error</div>
+    <div class="scale-fig__grid">
+      <div class="scale-fig__col">
+        <div class="eyebrow" style="margin-bottom: 8px;">training corpus</div>
+        <div class="display scale-fig__num">13T</div>
+        <div class="mono scale-fig__unit">tokens</div>
+        <div class="display italic scale-fig__note">assembled elsewhere, before you arrive</div>
+      </div>
+      <div class="scale-fig__col scale-fig__col--mid">
+        <div class="eyebrow" style="margin-bottom: 8px;">context window</div>
+        <div class="display scale-fig__num">128K</div>
+        <div class="mono scale-fig__unit">tokens</div>
+        <div class="display italic scale-fig__note">where the conversation lives</div>
+      </div>
+      <div class="scale-fig__col scale-fig__col--last">
+        <div class="eyebrow" style="margin-bottom: 8px;">your prompt</div>
+        <div class="display scale-fig__num scale-fig__num--accent">1K</div>
+        <div class="mono scale-fig__unit">tokens</div>
+        <div class="display italic scale-fig__note">a rounding error</div>
+      </div>
+    </div>
+  </div>
+  <figcaption class="eyebrow scale-fig__caption">
+    Source: GPT-4 technical reports · orders of magnitude
+  </figcaption>
+</figure>
+
+<style>
+.scale-fig { max-width: 800px; margin: 36px auto 24px; }
+.scale-fig__box {
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding: 22px 0;
+}
+.scale-fig__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.scale-fig__col { padding: 8px 18px; text-align: center; }
+.scale-fig__col--mid,
+.scale-fig__col--last { border-left: 1px solid var(--rule-soft); }
+.scale-fig__num {
+  font-size: 56px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+.scale-fig__num--accent { color: var(--accent); }
+.scale-fig__unit { font-size: 11px; color: var(--muted); margin-top: 6px; }
+.scale-fig__note { font-size: 13px; color: var(--ink-2); margin-top: 8px; }
+.scale-fig__caption { text-align: center; margin-top: 12px; display: block; }
+</style>
