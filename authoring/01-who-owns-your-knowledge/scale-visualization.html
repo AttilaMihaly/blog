@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scale: What You Bring to an AI Conversation</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a12;
+    color: #e0e0e0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+
+  h1 {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #888;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 60px;
+    text-align: center;
+  }
+
+  .stage {
+    width: 100%;
+    max-width: 900px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 60px;
+    padding-bottom: 40px;
+  }
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .circle-wrap {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .circle {
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .label {
+    text-align: center;
+  }
+
+  .label .name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #ccc;
+    margin-bottom: 4px;
+  }
+
+  .label .value {
+    font-size: 0.75rem;
+    color: #666;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .label .annotation {
+    font-size: 0.7rem;
+    color: #555;
+    margin-top: 2px;
+    font-style: italic;
+  }
+
+  /* overflow clip for the huge circle */
+  .overflow-container {
+    width: 100%;
+    max-width: 900px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 60px;
+    padding: 20px 0 40px;
+  }
+
+  .clip-top {
+    position: relative;
+  }
+
+  .clip-top::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 60px;
+    background: linear-gradient(to bottom, #0a0a12, transparent);
+    pointer-events: none;
+  }
+
+  .footnote {
+    margin-top: 40px;
+    font-size: 0.72rem;
+    color: #444;
+    text-align: center;
+    max-width: 600px;
+    line-height: 1.7;
+  }
+
+  .legend {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.78rem;
+    color: #777;
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+</style>
+</head>
+<body>
+
+<h1>What you bring to an AI conversation</h1>
+
+<div class="legend">
+  <div class="legend-item">
+    <div class="legend-dot" style="background:#3a6ea8;"></div>
+    <span>LLM training data</span>
+  </div>
+  <div class="legend-item">
+    <div class="legend-dot" style="background:#4a9e6a;"></div>
+    <span>Context window</span>
+  </div>
+  <div class="legend-item">
+    <div class="legend-dot" style="background:#c47a2e;"></div>
+    <span>Your prompt</span>
+  </div>
+</div>
+
+<svg id="viz" viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg"
+     style="width:100%;max-width:900px;overflow:visible;">
+
+  <defs>
+    <radialGradient id="gBlue" cx="40%" cy="35%">
+      <stop offset="0%" stop-color="#6ab0f5" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#1a3a6a" stop-opacity="0.9"/>
+    </radialGradient>
+    <radialGradient id="gGreen" cx="40%" cy="35%">
+      <stop offset="0%" stop-color="#7ddba0" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#1a5a35" stop-opacity="0.9"/>
+    </radialGradient>
+    <radialGradient id="gOrange" cx="40%" cy="35%">
+      <stop offset="0%" stop-color="#f0b060" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#7a4010" stop-opacity="0.9"/>
+    </radialGradient>
+    <clipPath id="topClip">
+      <rect x="0" y="0" width="900" height="500"/>
+    </clipPath>
+    <!-- fade at top for the huge circle -->
+    <linearGradient id="fadeTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0a12" stop-opacity="1"/>
+      <stop offset="30%" stop-color="#0a0a12" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!--
+    Values in tokens:
+    Training data: 13,000,000,000,000 (13T)
+    Context window:       128,000
+    Prompt:                 1,000
+
+    Using sqrt scale for radii (area ∝ value):
+    r_train  ∝ sqrt(13T)   = 3,605,551
+    r_ctx    ∝ sqrt(128K)  =     357.8
+    r_prompt ∝ sqrt(1K)    =      31.6
+
+    Normalizing so context = 80px:
+    scale = 80 / 357.8 = 0.2236
+    r_train  = 3,605,551 * 0.2236 ≈ 806,200  (shown clipped)
+    r_ctx    = 80px
+    r_prompt = 31.6 * 0.2236 ≈ 7.1px  (rounded to 7)
+
+    Positions (baseline y = 480):
+    Training circle: centered at x=180, bottom at y=480 → cy = 480 - 806200 ≈ very high, shown clipped
+    Context: centered at x=520, cy = 480 - 80 = 400
+    Prompt: centered at x=750, cy = 480 - 7 = 473
+  -->
+
+  <!-- Training data circle (massively clipped) -->
+  <g clip-path="url(#topClip)">
+    <circle cx="160" cy="-805720" r="806200" fill="url(#gBlue)" stroke="#3a6ea8" stroke-width="1" opacity="0.85"/>
+  </g>
+
+  <!-- Top fade overlay for training circle -->
+  <rect x="0" y="0" width="370" height="120" fill="url(#fadeTop)"/>
+
+  <!-- Context window circle -->
+  <circle cx="520" cy="400" r="80" fill="url(#gGreen)" stroke="#4a9e6a" stroke-width="1.5" opacity="0.9"/>
+
+  <!-- Prompt circle -->
+  <circle cx="750" cy="473" r="7" fill="url(#gOrange)" stroke="#c47a2e" stroke-width="1" opacity="1"/>
+
+  <!-- Baseline -->
+  <line x1="0" y1="480" x2="900" y2="480" stroke="#333" stroke-width="1"/>
+
+  <!-- Label: Training -->
+  <text x="160" y="494" text-anchor="middle" fill="#6ab0f5" font-size="12" font-family="sans-serif" font-weight="600">LLM training data</text>
+  <text x="160" y="510" text-anchor="middle" fill="#555" font-size="10" font-family="sans-serif">~13 trillion tokens</text>
+  <text x="160" y="50" text-anchor="middle" fill="#3a6ea8" font-size="10" font-family="sans-serif" font-style="italic">(continues far above)</text>
+  <!-- Arrow hint upward -->
+  <line x1="160" y1="60" x2="160" y2="20" stroke="#3a6ea8" stroke-width="1" stroke-dasharray="3,3"/>
+  <polygon points="160,14 156,22 164,22" fill="#3a6ea8"/>
+
+  <!-- Label: Context -->
+  <text x="520" y="494" text-anchor="middle" fill="#7ddba0" font-size="12" font-family="sans-serif" font-weight="600">Context window</text>
+  <text x="520" y="510" text-anchor="middle" fill="#555" font-size="10" font-family="sans-serif">~128,000 tokens</text>
+
+  <!-- Label: Prompt -->
+  <text x="750" y="494" text-anchor="middle" fill="#f0b060" font-size="12" font-family="sans-serif" font-weight="600">Your prompt</text>
+  <text x="750" y="510" text-anchor="middle" fill="#555" font-size="10" font-family="sans-serif">~1,000 tokens</text>
+
+  <!-- Ratio annotations -->
+  <text x="450" y="390" text-anchor="middle" fill="#444" font-size="9" font-family="sans-serif">context window is</text>
+  <text x="450" y="401" text-anchor="middle" fill="#4a9e6a" font-size="9" font-family="sans-serif" font-weight="600">100,000,000× smaller</text>
+  <text x="450" y="412" text-anchor="middle" fill="#444" font-size="9" font-family="sans-serif">than training data</text>
+
+  <text x="660" y="464" text-anchor="middle" fill="#444" font-size="9" font-family="sans-serif">prompt is</text>
+  <text x="660" y="475" text-anchor="middle" fill="#c47a2e" font-size="9" font-family="sans-serif" font-weight="600">128× smaller</text>
+  <text x="660" y="486" text-anchor="middle" fill="#444" font-size="9" font-family="sans-serif">than context</text>
+
+</svg>
+
+<p class="footnote">
+  Circle area is proportional to token count. The training data circle's true radius would extend ~1,600 km at this scale.
+  Figures are approximate: GPT-4 class model training data ≈ 13T tokens; typical enterprise context window ≈ 128K tokens; typical prompt ≈ 1K tokens.
+</p>
+
+</body>
+</html>
