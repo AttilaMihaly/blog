@@ -1,38 +1,336 @@
 ---
 import { getCollection } from 'astro:content';
+import Masthead from '../components/Masthead.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 import '../styles/global.css';
 
-const posts = await getCollection('blog');
-posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const allPosts = await getCollection('blog');
+allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const lead = allPosts[0];
+const featured = allPosts.slice(1, 3);
+const listed = allPosts.slice(3);
+
+function fmtDate(d: Date) {
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+function fmtDateShort(d: Date) {
+  return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+}
 ---
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blog</title>
-  </head>
-  <body class="max-w-2xl mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold mb-8">Blog</h1>
-    <ul class="space-y-6">
-      {
-        posts.map((post) => (
-          <li>
-            <a
-              href={`/blog/${post.id}`}
-              class="text-xl font-semibold text-blue-600 hover:underline"
-            >
-              {post.data.title}
-            </a>
-            <p class="text-gray-600 mt-1">{post.data.description}</p>
-            <time class="text-sm text-gray-400">
-              {post.data.pubDate.toDateString()}
-            </time>
-          </li>
-        ))
-      }
-    </ul>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Invariable Difference</title>
+  <meta name="description" content="A journal of programming languages, models, and adjacent ideas by Attila Mihaly." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body class="dir-b">
+  <Masthead currentPage="index" />
+
+  <main class="home-main">
+    <!-- Volume strap -->
+    <div class="home-strap">
+      <div class="eyebrow">
+        {lead.data.issue ? `Issue Nº ${lead.data.issue}` : `${allPosts.length} entries`}
+      </div>
+      <div class="eyebrow" style="text-align: center;">{fmtDate(lead.data.pubDate)}</div>
+      <div class="eyebrow" style="text-align: right;">Budapest · +01:00</div>
+    </div>
+    <div class="rule"></div>
+
+    <!-- Lead essay -->
+    <article class="home-lead">
+      <div class="home-lead__main">
+        <div class="eyebrow accent" style="margin-bottom: 18px;">
+          Lead essay{lead.data.issue ? ` · Nº ${lead.data.issue}` : ''}
+        </div>
+        <h1 class="display home-lead__title">
+          {lead.data.title}
+        </h1>
+        {lead.data.dek && (
+          <p class="display italic home-lead__dek">{lead.data.dek}</p>
+        )}
+        <p class="home-lead__snip">{lead.data.description}</p>
+        <div class="home-lead__meta">
+          <a href={`/blog/${lead.id}`} style="border-bottom: 1px solid var(--ink);">Read the essay</a>
+          <span>·</span>
+          {lead.data.readTime && <span>{lead.data.readTime}</span>}
+          {lead.data.readTime && lead.data.tokens && <span>·</span>}
+          {lead.data.tokens && (
+            <span class="token-chip">
+              <span class="num">{lead.data.tokens}</span>
+              <span class="lbl">tokens, for the LLMs</span>
+            </span>
+          )}
+        </div>
+      </div>
+
+      <aside class="home-lead__aside">
+        <div class="eyebrow" style="margin-bottom: 12px;">From the masthead</div>
+        <p class="display italic home-lead__aside-quote">
+          &ldquo;A specification you cannot inspect is a story you cannot edit.&rdquo;
+        </p>
+        <div class="rule-soft" style="margin: 14px 0;"></div>
+        {allPosts.length > 1 && (
+          <>
+            <div class="eyebrow" style="margin-bottom: 8px;">In this issue</div>
+            <ol class="home-lead__issue-list">
+              {allPosts.slice(1, 5).map((p) => (
+                <li class="home-lead__issue-item">
+                  {p.data.issue && <span class="mono" style="color: var(--muted);">p.{p.data.issue}</span>}
+                  <a href={`/blog/${p.id}`} style="border-bottom: none;">{p.data.title}</a>
+                </li>
+              ))}
+            </ol>
+          </>
+        )}
+      </aside>
+    </article>
+
+    <div class="rule"></div>
+
+    <!-- Recent dispatches -->
+    {allPosts.length > 1 && (
+      <section class="home-recent">
+        <div class="home-recent__header">
+          <h2 class="eyebrow accent">Recent dispatches</h2>
+          <a href="/archive" class="eyebrow" style="border-bottom: 1px solid var(--rule-soft);">The full archive →</a>
+        </div>
+
+        {featured.length > 0 && (
+          <div class="home-featured">
+            {featured.map((p) => (
+              <article class="home-card">
+                <div class="eyebrow accent" style="margin-bottom: 10px;">
+                  {p.data.kicker ?? 'Post'}{p.data.issue ? ` · Nº ${p.data.issue}` : ''}
+                </div>
+                <h3 class="display home-card__title">
+                  <a href={`/blog/${p.id}`} style="border-bottom: none;">{p.data.title}</a>
+                </h3>
+                {(p.data.dek ?? p.data.description) && (
+                  <p class="display italic home-card__dek">{p.data.dek ?? p.data.description}</p>
+                )}
+                <div class="home-card__meta">
+                  <span>{fmtDateShort(p.data.pubDate)}</span>
+                  {p.data.readTime && <><span>·</span><span>{p.data.readTime}</span></>}
+                  {p.data.tokens && (
+                    <><span>·</span>
+                    <span class="token-chip">
+                      <span class="num">{p.data.tokens}</span>
+                      <span class="lbl">tok</span>
+                    </span></>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+
+        {listed.length > 0 && (
+          <>
+            <div class="rule-soft"></div>
+            <div class="home-list">
+              {listed.map((p) => (
+                <article class="home-list-item">
+                  {p.data.issue && (
+                    <div class="display italic home-list-item__n">{p.data.issue}</div>
+                  )}
+                  <div class="home-list-item__body">
+                    <div class="eyebrow" style="margin-bottom: 6px;">
+                      {p.data.kicker ?? 'Post'} · {fmtDateShort(p.data.pubDate)}
+                    </div>
+                    <h4 class="display home-list-item__title">
+                      <a href={`/blog/${p.id}`} style="border-bottom: none;">{p.data.title}</a>
+                    </h4>
+                    {(p.data.dek ?? p.data.description) && (
+                      <p class="display italic home-list-item__dek">{p.data.dek ?? p.data.description}</p>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </>
+        )}
+      </section>
+    )}
+
+    <div class="rule"></div>
+
+    <!-- Topics strip -->
+    <section class="home-topics">
+      <div class="eyebrow accent" style="margin-bottom: 18px;">Subjects regularly considered</div>
+      <div class="display italic home-topics__list">
+        <a href="/topics#domain-modeling" class="display">domain modeling</a> ·&nbsp;
+        <a href="/topics#type-systems" class="display">type systems</a> ·&nbsp;
+        <a href="/topics#specifications" class="display">specifications</a> ·&nbsp;
+        <a href="/topics#decision-tables" class="display">decision tables</a> ·&nbsp;
+        <a href="/topics#llms" class="display">LLMs &amp; reasoning</a> ·&nbsp;
+        <a href="/topics#query-languages" class="display">query languages</a> ·&nbsp;
+        <a href="/topics#provenance" class="display">provenance</a> ·&nbsp;
+        <a href="/topics#meta" class="display">industry &amp; meta</a>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</body>
 </html>
 
+<style>
+.home-main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 64px;
+}
+.home-strap {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 32px;
+  align-items: center;
+  padding: 20px 0 28px;
+}
+
+/* Lead */
+.home-lead {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 56px;
+  padding: 40px 0 56px;
+}
+.home-lead__title {
+  font-size: 76px;
+  line-height: 0.96;
+  letter-spacing: -0.03em;
+  margin-bottom: 18px;
+}
+.home-lead__dek {
+  font-size: 23px;
+  line-height: 1.3;
+  color: var(--ink-2);
+  max-width: 560px;
+  margin-bottom: 22px;
+}
+.home-lead__snip {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  max-width: 540px;
+  margin-bottom: 16px;
+  text-wrap: pretty;
+}
+.home-lead__meta {
+  margin-top: 24px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.home-lead__aside {
+  border-left: 1px solid var(--rule-soft);
+  padding-left: 28px;
+}
+.home-lead__aside-quote {
+  font-size: 17px;
+  line-height: 1.4;
+  margin-bottom: 14px;
+  color: var(--ink-2);
+}
+.home-lead__issue-list {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+.home-lead__issue-item {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 10px;
+  font-size: 13.5px;
+}
+
+/* Recent */
+.home-recent { padding: 40px 0; }
+.home-recent__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 24px;
+}
+.home-featured {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  margin-bottom: 40px;
+}
+.home-card__title {
+  font-size: 34px;
+  line-height: 1.05;
+  letter-spacing: -0.022em;
+  margin-bottom: 12px;
+}
+.home-card__dek {
+  font-size: 17.5px;
+  line-height: 1.4;
+  color: var(--ink-2);
+  margin-bottom: 14px;
+}
+.home-card__meta {
+  margin-top: 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+}
+.home-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  padding-top: 32px;
+}
+.home-list-item {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 16px;
+}
+.home-list-item__n {
+  font-size: 36px;
+  line-height: 1;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+}
+.home-list-item__title {
+  font-size: 22px;
+  line-height: 1.15;
+  letter-spacing: -0.018em;
+  margin-bottom: 6px;
+}
+.home-list-item__dek {
+  font-size: 14.5px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+/* Topics */
+.home-topics { padding: 36px 0 56px; }
+.home-topics__list {
+  font-size: 26px;
+  line-height: 1.4;
+  letter-spacing: -0.012em;
+  max-width: 880px;
+  color: var(--ink-2);
+}
+.home-topics__list a {
+  border-bottom: none;
+  color: var(--ink-2);
+}
+.home-topics__list a:hover { color: var(--accent); }
+</style>

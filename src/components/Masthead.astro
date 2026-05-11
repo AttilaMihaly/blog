@@ -1,0 +1,68 @@
+---
+interface Props {
+  currentPage?: 'index' | 'archive' | 'topics' | 'post';
+}
+const { currentPage } = Astro.props;
+---
+
+<header class="mast">
+  <div class="mast__inner">
+    <nav class="mast__nav mast__nav--left">
+      <a href="/" class:list={['mast__link', { 'mast__link--active': currentPage === 'index' }]}>Index</a>
+      <a href="/archive" class:list={['mast__link', { 'mast__link--active': currentPage === 'archive' }]}>Archive</a>
+      <a href="/topics" class="mast__link">Topics</a>
+      <a href="/colophon" class="mast__link">Colophon</a>
+    </nav>
+    <div class="mast__title">
+      <a href="/" class="mast__name display italic">The Invariable Difference</a>
+      <div class="eyebrow mast__sub">Attila Mihaly · A journal of programming languages, models, and adjacent ideas</div>
+    </div>
+    <nav class="mast__nav mast__nav--right">
+      <a href="/feed.xml" class="mast__link">Feed</a>
+      <a href="/about" class="mast__link">About</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+.mast {
+  border-bottom: 2px solid var(--ink);
+}
+.mast__inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 40px 64px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 24px;
+}
+.mast__nav {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: flex;
+  gap: 22px;
+  min-width: 160px;
+}
+.mast__nav--right { justify-content: flex-end; }
+.mast__title { text-align: center; flex: 0 0 auto; }
+.mast__name {
+  font-size: 40px;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  display: block;
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+}
+.mast__name:hover { color: var(--ink) !important; border-bottom: none !important; }
+.mast__sub { margin-top: 10px; }
+.mast__link {
+  border-bottom: none;
+  color: var(--muted);
+  padding-bottom: 0;
+}
+.mast__link:hover { color: var(--accent); border-bottom: none; }
+.mast__link--active { color: var(--ink); }
+</style>

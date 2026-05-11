@@ -1,0 +1,38 @@
+---
+---
+
+<footer class="foot">
+  <div class="foot__inner">
+    <div>THE INVARIABLE DIFFERENCE · A.M. · 2010–2026</div>
+    <div class="foot__links">
+      <a href="/feed.xml">/atom</a>
+      <a href="/colophon">/colophon</a>
+      <a href="mailto:attila.mihaly.jr@gmail.com">contact@</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+.foot {
+  border-top: 1px solid var(--rule-soft);
+  margin-top: auto;
+}
+.foot__inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 28px 64px 48px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.foot__links { display: flex; gap: 24px; }
+.foot a {
+  color: var(--muted);
+  border-bottom: 1px solid var(--rule-soft);
+  padding-bottom: 1px;
+}
+.foot a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+</style>
