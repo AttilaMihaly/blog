@@ -15,6 +15,18 @@
   --font-body: 'Inter', system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 
+  --astro-code-foreground: var(--ink);
+  --astro-code-background: var(--paper-2);
+  --astro-code-token-constant: var(--accent);
+  --astro-code-token-string: #3F5E3A;
+  --astro-code-token-comment: var(--muted);
+  --astro-code-token-keyword: var(--accent);
+  --astro-code-token-parameter: var(--ink-2);
+  --astro-code-token-function: var(--ink);
+  --astro-code-token-string-expression: #3F5E3A;
+  --astro-code-token-punctuation: var(--ink-2);
+  --astro-code-token-link: var(--accent);
+
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
@@ -126,6 +138,21 @@
   background: var(--paper-2);
   padding: 1px 4px;
   border-radius: 2px;
+}
+.article-body pre {
+  margin: 28px 0;
+  padding: 20px 22px;
+  border: 1px solid var(--rule-soft);
+  border-radius: 3px;
+  overflow-x: auto;
+  font-size: 0.85em;
+  line-height: 1.55;
+}
+.article-body pre code {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  font-size: 1em;
 }
 .article-body hr {
   border: none;

@@ -83,7 +83,7 @@ function fmtDateShort(d: Date) {
             <ol class="home-lead__issue-list">
               {allPosts.slice(1, 5).map((p) => (
                 <li class="home-lead__issue-item">
-                  {p.data.issue && <span class="mono" style="color: var(--muted);">p.{p.data.issue}</span>}
+                  <span class="mono" style="color: var(--muted);">{p.data.issue ? `p.${p.data.issue}` : '—'}</span>
                   <a href={`/blog/${p.id}`} style="border-bottom: none;">{p.data.title}</a>
                 </li>
               ))}
@@ -138,9 +138,7 @@ function fmtDateShort(d: Date) {
             <div class="home-list">
               {listed.map((p) => (
                 <article class="home-list-item">
-                  {p.data.issue && (
-                    <div class="display italic home-list-item__n">{p.data.issue}</div>
-                  )}
+                  <div class="display italic home-list-item__n">{p.data.issue ?? '—'}</div>
                   <div class="home-list-item__body">
                     <div class="eyebrow" style="margin-bottom: 6px;">
                       {p.data.kicker ?? 'Post'} · {fmtDateShort(p.data.pubDate)}
