@@ -1,5 +1,7 @@
 # Completed
 
+- [The Bottleneck Was Never the Code](02-bottleneck-was-never-the-code/article.md) — published 2026-08-08
+
 # In progress
 
 - Who owns your knowledge?
