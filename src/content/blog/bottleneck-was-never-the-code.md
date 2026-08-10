@@ -1,107 +1,109 @@
 ---
 title: "The Bottleneck Was Never the Code"
-description: "We spent two years making each developer faster. Amdahl's law has something to say about that."
-dek: "We spent two years making each developer faster. Amdahl's law has something to say about that."
+description: "Agentic tools made me faster. My team didn't get faster. Here's where I think the gap comes from."
+dek: "Agentic tools made me faster. My team didn't get faster. Here's where I think the gap comes from."
 kicker: "Essay"
 pubDate: "2026-08-08"
-tokens: "2,323"
-readTime: "8 min"
+tokens: "2,501"
+readTime: "9 min"
 issue: "029"
 ---
 
-For most of my career I believed a simple thing: to make a team faster, make each engineer faster. Better languages, better tools, better abstractions. I never questioned it. Of course I didn't — it worked. Nearly everything I shipped in twenty years of writing software followed that logic, and most of it paid off.
+For most of my career I believed a simple thing: to make a team faster, make each engineer faster. Better languages, better tools, better abstractions. Of course I believed it — it worked, over and over, for twenty years.
 
-Then I started paying attention to the problems we never solve.
+Then agentic coding tools showed up and did more for my individual speed than most of what I shipped in that time. On a well-scoped change in a codebase with clear structure, the machine writes it faster and often cleaner than I do. I have no interest in arguing about whether that's real. It's real.
 
-Famines happen inside functioning food distribution systems. Amartya Sen showed this decades ago and nobody has seriously disputed it since. Cities with housing shortages know exactly how to build housing — the drawings exist, the contractors exist, the demand is screaming. And closer to home: we have known how to write maintainable software since at least the seventies. Parnas published on information hiding in 1972. Simply put, the knowledge is not missing.
+And my team is not meaningfully faster.
 
-So why are these problems still here?
+That gap has been bothering me for about a year. What follows is where I think it comes from. I'm not certain about it, and I'll say at the end what would change my mind.
 
-## Not a Knowledge Deficit
+## A Problem We Already Solved
 
-Notice what all three have in common. In each case the solution is known, written down, and unimplemented. Nobody is stuck because they cannot think of the answer. They are stuck because getting from "the answer is known" to "the answer is applied" requires several parties with different information and different incentives to agree, and that step keeps failing.
+In 1847, Ignaz Semmelweis had the doctors at Vienna General Hospital wash their hands in chlorinated lime between the autopsy room and the maternity ward. Mortality in his clinic fell from double digits to around two percent. It took roughly forty years for handwashing to become standard practice, and when it did, it arrived on the back of germ theory rather than on the back of his evidence.
 
-This is not a hard problem in the way that hard problems are hard. It is a different kind of problem entirely.
+Part of why he failed is worth sitting with. Statistical argument was unusual in medicine at the time, and he published long tables of raw numbers with no summary and no graphs. The knowledge existed and it was correct. The artifact carrying it wasn't legible to the people who had to act on it.
 
-Arrow's impossibility theorem says that no procedure for aggregating individual preferences into a group decision satisfies a short list of entirely reasonable conditions. Not "we haven't found one yet." There isn't one. It's a theorem. Gibbard–Satterthwaite adds that any reasonable voting system can be gamed by strategic misrepresentation. These results do not soften as the participants get smarter.
-
-And of course most coordination failures are not failures at all. They are somebody's working solution. Zoning is not a puzzle homeowners cannot crack — it's a mechanism they built and defend, and it does exactly what they want. A participant who is better at finding Pareto improvements contributes nothing here, because the blocker is not ignorance of a better allocation. The blocker is a party who prefers the current one.
-
-Unfortunately, this is the part of the problem that improves least when you add capability.
+I think a lot of our problems in software have this shape, and I think we keep misdiagnosing them as knowledge problems.
 
 ## Where Six Weeks Goes
 
-Now apply that to our own domain.
-
 Take a feature that took your team six weeks and run the honest audit. How much of that was somebody typing code?
 
-In my experience it is a small fraction. The rest went to deciding what to build. Discovering three weeks in that what the business asked for and what the specification said were different things. Finding out another team already solved this, differently, and now there are two answers in the codebase. Waiting for review from the one person who holds the context in their head. Reconstructing a mental model six months later from a document that stopped describing the system a long time ago.
+In my experience it's a small fraction. The rest went to deciding what to build. Discovering three weeks in that what the business asked for and what the specification said were different things. Finding out another team already solved this, differently, and now there are two answers in the codebase. Waiting on review from the one person who holds the context in their head. Reconstructing a mental model six months later from a document that stopped describing the system a long time ago.
 
-Every one of those is the same problem as the famine and the housing shortage, at smaller scale. The knowledge exists. It is distributed across people who represent it differently and who are measured on different things. The work is not producing the knowledge. The work is reconciling it.
+Notice what those have in common. The knowledge exists in every case. It's distributed across people who represent it differently and who are measured on different things. The work isn't producing the knowledge. It's reconciling it.
 
-This means that making each of those people faster at producing their own representation does not obviously help. In fact it may hurt. More representations, produced faster, still unreconciled.
+This means that making each of those people faster at producing their own representation may not help much. It might even hurt — more representations, produced faster, still unreconciled.
 
-Amdahl gave us the shape of this in 1967. Speed up one part of a system and your total gain is bounded by how much of the runtime that part accounted for. We all know this. We apply it rigorously to code and then forget it completely when we think about organizations.
+There's a reason to think reconciliation is hard in a way that resists tooling. Arrow's impossibility theorem shows that no procedure for combining individual preferences into a group decision satisfies a short list of reasonable conditions. That result is about voting systems, and I want to be careful not to overclaim it — a design review is not an election. But it suggests that aggregating preferences has a floor that isn't lifted by making the participants sharper, and that matches what I see when a technical disagreement stays unresolved for three sprints.
 
-> We have spent two years parallelizing the part that was never the bottleneck.
+## Amdahl's Other Half
 
-## Back to Reality
+Amdahl's law says that when you speed up one part of a system, your total gain is bounded by how much of the runtime that part accounted for. Halve the time on something that was 20% of the work and you've bought yourself 10%, no matter how good the optimization was.
 
-This is where I have to be careful, because the number everyone quotes is no longer the number.
+We apply this rigorously to code. We ask what fraction of the runtime a function accounts for before we optimize it, because we learned the hard way that optimizing the wrong function is wasted effort.
 
-In July 2025, METR ran a randomized controlled trial — a real one, with 16 experienced developers working 246 real issues in repositories they had contributed to for years. The developers forecast a 24% speedup from AI tools. Afterwards they reported a 20% speedup. The measured result was a 19% *slowdown*.
+Then we walk into the AI conversation and skip that step entirely. I have not seen a serious attempt to measure what fraction of a delivery cycle is code production before concluding that faster code production is the win.
 
-That result made the rounds, and I quoted it myself. But METR published a follow-up in February 2026 and now flags the original as historical. For developers who returned to the study, they estimate a speedup instead. Agentic tools arrived in between, and those are a different thing than the autocomplete-shaped assistants of early 2025. If you are still citing the 19% figure as current, stop.
+> The gains are real. They're just landing on the part of the work that was never the constraint.
 
-So the individual gains are real. Let's grant it fully: on a well-scoped change in a codebase with clear structure, the machine writes it faster and cleaner than I do. I have no interest in the argument about whether that's true. It's true.
+## The Numbers
 
-Here is the question that survives. Adoption is near-universal. Individual speedup is measurable. So name the organizations whose delivery has visibly compounded in proportion.
+The measurement here is genuinely unsettled and I'd rather show that than pretend otherwise.
 
-I can't. What I see instead looks like churn — teams metabolizing new tools, re-litigating conventions, and shipping at roughly the pace they shipped before.
+METR ran a randomized controlled trial on experienced developers working real issues in their own repositories. Their 2025 result showed a slowdown; their February 2026 follow-up estimates a speedup for the developers who returned. METR flags the earlier result as historical and notes selection effects in the newer data, with confidence intervals wide enough to include no effect at all. My reading is that individual gains are probably real now and smaller than the marketing suggests.
 
-The code is leaving a trace, though. GitClear has been measuring change patterns across hundreds of millions of commits, and the shape is consistent. Duplicated blocks are at the highest level on record. Refactoring collapsed from 21% of changed lines in 2022 to under 4% today, while copy/paste went the other way. And function connectivity — how often newly written code calls into code that already exists — is down 35% since 2023. New code increasingly sits isolated in self-contained files.
+One finding from the original study survived, and it's the one I keep thinking about. Developers estimated a 24% speedup beforehand and reported a 20% speedup afterwards, while the measurement said otherwise. Whichever direction the true effect runs, we apparently can't detect it by asking people how it feels — which is most of what enterprise AI strategy currently rests on.
 
-Notice what that describes. It is not bad code. It is *unreconciled* code. Every one of those metrics measures how well a change fits into what somebody else already built, and every one of them is moving the wrong way while individual output moves up. That is the signature of a coordination problem, not a capability one.
+The code itself may be a better witness. GitClear measures change patterns across a large commit dataset, and their 2026 report describes duplicated blocks at the highest level they've recorded, refactoring falling from 21% of changed lines in 2022 to under 4%, copy/paste rising, and function connectivity — how often new code calls into code that already exists — down 35% since 2023. This is one vendor's dataset and worth reading with that in mind.
 
-And the finding that did survive the correction is the one almost nobody quotes, though it should worry us most. Those developers experienced the slowdown firsthand and still reported being sped up. Whatever is happening at the organizational level, we cannot detect it by asking people how it feels. "It feels much faster" is currently the entire evidentiary basis for most enterprise AI strategy.
+But notice what those metrics measure. Not whether code is good. Whether a change fits into what somebody else already built. They're all moving one way while individual output moves the other, and that's closer to a reconciliation problem than a capability one.
 
 ## But Maybe It's Just Early
 
-The obvious objection is that this is a J-curve. Learning cost now, payoff later. And this is exactly what the productivity paradox looked like in 1987, when Solow observed that computers were visible everywhere except in the productivity statistics. It took roughly fifteen years to resolve.
+The obvious objection is that this is a J-curve — learning cost now, payoff later. This is roughly what the productivity paradox looked like in 1987, when Solow observed that computers were visible everywhere except in the productivity statistics, and it took years to resolve.
 
-I take this seriously and I cannot rule it out from inside it. But notice what the J-curve explanation actually predicts: the constraint is unfamiliarity, so the gap closes as familiarity grows. That is testable, and I do not see it closing where familiarity is highest.
+I take that seriously and I can't rule it out from inside it. But the J-curve explanation predicts something specific: the constraint is unfamiliarity, so the gap closes as familiarity grows. That's testable, and I don't see it closing where familiarity is highest. I could be looking at too small a sample.
 
-## The Artifact
+## The Only Reader
 
-So what would coordination between people and machines actually look like, if we treated it as the problem?
+Spec-driven development is the industry's most serious move toward treating the artifact as the thing that matters, and I want to be fair to it. The specifications get checked into version control alongside the code. They evolve with the system. Several people can read them, review them, and change them. That's multiplayer by design, and the criticism that it's prompt engineering with extra steps doesn't hold up.
 
-Let me start somewhere unfashionable. Excel is the most successful coordination technology our industry has ever produced, and we hate admitting it. A domain expert authors the logic directly. The artifact is simultaneously the specification and the running system. Somebody else opens it and can see what it does. Of course it is a disaster on every axis we care about — no types, no version control, no tests, logic buried in cells. But it solved the boundary problem, and forty years of better-engineered alternatives did not.
+The problem isn't the design. It's who actually shows up.
 
-Now imagine a specification with Excel's property and none of its failures. Domain experts author it in language they will actually write. It is precise enough that a machine can check it and generate from it. When the business and engineering disagree, the disagreement surfaces as a diff in a shared artifact — not as a discovery three weeks into implementation.
+The specs are enormous, and they're prose. Developers skim them at review time and then go read the code, because given a thousand words describing a behaviour and the forty lines that implement it, the code is the faster and more reliable answer. Stakeholders read the section they wrote and not much else. Too long, too many words, and no way to see the shape of the thing without reading all of it.
 
-That last part is load-bearing. Coordination needs a durable object that several parties with different agendas can read, edit, and *disagree inside of*. A meeting is not that — it is serialized and dominated by whoever talks most. A chat transcript is not that — it is private, ephemeral, and leaves no shared state behind. Code is not that — it is legible to exactly one of the parties. And a prose specification is not that either, because nothing checks it, so it rots the day after it's written.
+There's exactly one party that reads the whole document, every time, without complaint. It's the model.
 
-In that picture the model's job changes completely. It is not producing more code faster. It is translating across the boundary between representations and keeping the artifact and the system from drifting apart.
+So the artifact we built to hold shared understanding has quietly turned into a prompt. It has one reader, and that reader has no stake in the disagreement — it can't tell you the spec contradicts what somebody said in a meeting last week, because it wasn't in the meeting and doesn't care. We didn't get to multiplayer. We got to single player, and the player is the AI.
 
-## Single Player
+Which is the same failure as Semmelweis publishing his tables without a graph. The information is there and it's correct. Nobody can get at it.
 
-Spec-driven development is the industry's first real move in this direction and I want to give it full credit. But look at how it is framed today: one developer, writing a better prompt, getting a better result.
+My instinct is that part of the answer is visual — that a diagram or a worked example does in ten seconds what four pages of prose does badly. But that's an instinct, not a finding.
 
-That is single player. It is individual productivity wearing a coordination costume.
+## One Possible Direction
 
-The interesting version is multiplayer, and I don't see anyone building it.
+I'd rather leave the problem open than pretend I've solved it, so take the rest of this as one direction among several.
+
+Excel is arguably the most successful coordination technology our industry has produced. A domain expert authors the logic directly. The artifact is simultaneously the specification and the running system. Somebody else opens it and can see what it does without reading four pages first. Of course it's a mess on every axis we care about — no types, no meaningful version control, no tests, logic buried in cells. But it solved the boundary problem between domain experts and software, and forty years of better-engineered alternatives mostly haven't.
+
+So: a specification with Excel's legibility and fewer of its failures. Authored in a form domain experts will actually work in, precise enough that a machine can check it and generate from it, and structured so that disagreement between business and engineering shows up as a diff rather than as a discovery three weeks into implementation.
+
+Whether or not that particular shape turns out to be right, the requirement underneath it seems solid to me. Reconciliation needs a durable object that several parties can read, edit, and disagree inside of. A meeting isn't that — it's serialized and dominated by whoever talks most. A chat transcript isn't that — it's private, ephemeral, and leaves no shared state. Code isn't that — it's legible to exactly one of the parties. And prose specifications, as above, turn out not to be either.
+
+If that's right, the model's job changes. Not producing more code faster, but translating across the boundary between representations and keeping the artifact and the system from drifting apart.
 
 ## What I Have So Far
 
-I took a stab at this with Morphir Substrate — markdown-native specifications that domain experts author directly, feeding deterministic generators that LLMs orchestrate rather than replace, producing code across multiple targets. I have been stress-testing it against US liquidity regulation, which is unforgiving enough to be a real test of whether the representation holds.
+I took a stab at this with Morphir Substrate — markdown-native specifications that domain experts author directly, feeding deterministic generators that LLMs orchestrate rather than replace, producing code across multiple targets. I've been stress-testing it against US liquidity regulation, which is unforgiving enough to be a real test of whether the representation holds.
 
-I want to scope this honestly. The thesis is untested. It cannot be tested by one person, because coordination requires at least two parties with divergent agendas, and so far I have mostly been arguing with myself. The experiment I need is one domain expert and one engineer working the same specification and disagreeing in it. That is the next step. Everything past it is deferred.
+I'd rather be clear about what this is. It's a bet on one shape of answer to a problem I'm more confident about than the answer. The thesis is untested, and it can't be tested by one person, because reconciliation needs at least two parties with different information and different incentives — so far I've mostly been arguing with myself. The next step is one domain expert and one engineer working the same specification and disagreeing in it. Everything past that is deferred.
 
-> **Important note:** none of this says AI capability doesn't matter. If capability keeps compounding while our ability to aggregate decisions stays where it is, we have not made anything safer — we have handed much more power to an unchanged mechanism. My claim is narrower. Capability is not where the remaining organizational gains are, and we are spending as if it were.
+> **Important note:** none of this says capability doesn't matter. If capability keeps compounding while our ability to reconcile decisions stays where it is, that's not obviously a safer place to be. My claim is narrower — that capability may not be where the remaining organizational gains are, and we're spending as if it clearly were.
 
-Here is what would prove me wrong. If organizations adopting agentic coding show durable gains in both throughput and stability, without changing how decisions get made or how specifications are represented, then capability was the bottleneck and I was looking in the wrong place.
+Here's what would change my mind. If organizations adopting agentic coding show durable gains in both throughput and stability, without changing how decisions get made or how specifications are represented, then code production was the constraint and I was looking in the wrong place.
 
-If you are working on the coordination side of this — in tooling, in specification languages, in decision infrastructure, in anything that treats the gap between people as the engineering problem rather than the overhead — I would like to hear from you.
+If you're working on the reconciliation side of this — in tooling, in specification languages, in anything that treats the gap between people as the engineering problem rather than the overhead — I'd like to hear from you.
 
 What do you think?
 
@@ -109,21 +111,11 @@ What do you think?
 
 ## References
 
-**Coordination and social choice**
-
-- Kenneth J. Arrow, *Social Choice and Individual Values*, Wiley, 1951. The impossibility theorem.
-- Allan Gibbard, "Manipulation of Voting Schemes: A General Result," *Econometrica* 41(4), 1973.
-- Mark A. Satterthwaite, "Strategy-proofness and Arrow's Conditions," *Journal of Economic Theory* 10(2), 1975.
-- Amartya Sen, *Poverty and Famines: An Essay on Entitlement and Deprivation*, Oxford University Press, 1981.
-
-**Computing history**
-
+- "Ignaz Semmelweis," *Wikipedia*. [Article](https://en.wikipedia.org/wiki/Ignaz_Semmelweis)
+- "Ignaz Semmelweis," Science History Institute, scientific biography. [Article](https://www.sciencehistory.org/education/scientific-biographies/ignaz-semmelweis/)
+- Kenneth J. Arrow, *Social Choice and Individual Values*, Wiley, 1951.
 - Gene M. Amdahl, "Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities," *AFIPS Conference Proceedings* 30, 1967.
-- David L. Parnas, "On the Criteria To Be Used in Decomposing Systems into Modules," *Communications of the ACM* 15(12), 1972.
-- Robert M. Solow, review of *Manufacturing Matters*, *New York Times Book Review*, 12 July 1987. The origin of the productivity paradox.
-
-**AI and developer productivity**
-
+- Robert M. Solow, review of *Manufacturing Matters*, *New York Times Book Review*, 12 July 1987.
 - Joel Becker, Nate Rush, Beth Barnes, David Rein, "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity," METR, July 2025. [Blog](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/) · [arXiv:2507.09089](https://arxiv.org/abs/2507.09089)
 - METR, "We Are Changing Our Developer Productivity Experiment Design," February 2026. [Blog](https://metr.org/blog/2026-02-24-uplift-update/)
 - GitClear, "The Maintainability Gap: 2026 AI Code Quality Research." [Report](https://www.gitclear.com/the_ai_code_quality_maintainability_gap)
