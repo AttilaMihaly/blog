@@ -66,10 +66,16 @@ const { currentPage } = Astro.props;
 .mast__link:hover { color: var(--accent); border-bottom: none; }
 .mast__link--active { color: var(--ink); }
 
+@media (max-width: 900px) {
+  .mast__inner { padding-left: 28px; padding-right: 28px; }
+}
+
 @media (max-width: 640px) {
   .mast__inner {
     flex-direction: column;
     align-items: center;
+    padding-left: 16px;
+    padding-right: 16px;
     padding-top: 24px;
     padding-bottom: 16px;
     gap: 14px;
@@ -80,10 +86,11 @@ const { currentPage } = Astro.props;
     order: 2;
     flex-wrap: wrap;
     justify-content: center;
+    font-size: 14px;
   }
   .mast__nav--right { justify-content: center; }
   .mast__title { order: 1; }
-  .mast__name { font-size: 28px; }
-  .mast__sub { font-size: 9.5px; line-height: 1.4; }
+  .mast__name { font-size: 35px; }
+  .mast__sub { font-size: 12px; line-height: 1.4; }
 }
 </style>

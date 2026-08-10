@@ -200,21 +200,24 @@ function fmtShort(d: Date) {
 }
 
 @media (max-width: 900px) {
+  .archive-main { padding-left: 28px; padding-right: 28px; }
   .archive-year__grid { grid-template-columns: 64px 1fr; gap: 20px; }
   .archive-year__label { font-size: 44px; position: static; }
 }
 
 @media (max-width: 640px) {
+  .archive-main { padding-left: 16px; padding-right: 16px; }
+
   .archive-hero { padding: 28px 0 20px; }
-  .archive-hero__title { font-size: 40px; }
-  .archive-hero__sub { font-size: 15px; }
+  .archive-hero__title { font-size: 50px; }
+  .archive-hero__sub { font-size: 19px; }
 
   .archive-tabs { padding: 18px 0; }
-  .archive-tabs__inner { flex-wrap: wrap; gap: 12px 20px; }
+  .archive-tabs__inner { flex-wrap: wrap; gap: 12px 20px; font-size: 14px; }
   .archive-tabs__total { margin-left: 0; flex-basis: 100%; }
 
   .archive-year__grid { grid-template-columns: 1fr; gap: 8px; }
-  .archive-year__label { font-size: 30px; }
+  .archive-year__label { font-size: 38px; }
 
   .archive-entry {
     grid-template-columns: 1fr auto;
