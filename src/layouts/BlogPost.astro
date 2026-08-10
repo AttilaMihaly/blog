@@ -160,4 +160,28 @@ function fmtDate(d: Date) {
 }
 .post-nav__link:hover { color: var(--accent); border-bottom-color: var(--accent); }
 .post-comments { margin-top: 64px; max-width: 660px; margin-left: auto; margin-right: auto; }
+
+@media (max-width: 640px) {
+  .post-main { padding-bottom: 48px; }
+  .post-strap {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    text-align: center;
+    padding: 16px 0 20px;
+  }
+  .post-strap .eyebrow { text-align: center !important; }
+
+  .post-article { padding-top: 32px; }
+  .post-title { font-size: 40px; margin-bottom: 14px; }
+  .post-dek { font-size: 18px; margin-bottom: 28px; }
+  .post-rule-center { margin-bottom: 32px; }
+
+  .post-nav {
+    flex-direction: column;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .post-comments { margin-top: 48px; }
+}
 </style>

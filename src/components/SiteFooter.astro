@@ -35,4 +35,14 @@
   padding-bottom: 1px;
 }
 .foot a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+@media (max-width: 640px) {
+  .foot__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding-top: 20px;
+    padding-bottom: 32px;
+  }
+}
 </style>
