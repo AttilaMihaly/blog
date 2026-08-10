@@ -1,14 +1,12 @@
 import Giscus from '@giscus/react';
 
-// Fill in these values after setting up Giscus at https://giscus.app
-// See README.md for instructions.
 export default function GiscusComments() {
   return (
     <Giscus
-      repo="OWNER/REPO"
-      repoId="REPO_ID"
+      repo="AttilaMihaly/blog"
+      repoId="R_kgDOSZSHqQ"
       category="Announcements"
-      categoryId="CATEGORY_ID"
+      categoryId="DIC_kwDOSZSHqc4DDFCC"
       mapping="pathname"
       strict="0"
       reactionsEnabled="1"

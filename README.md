@@ -27,23 +27,12 @@ Then open [http://localhost:4321](http://localhost:4321).
 
 ### 1. Giscus comments
 
-1. Go to <https://giscus.app> and follow the configuration wizard for your repository.
-2. The wizard will give you values for `repo`, `repoId`, `category`, and `categoryId`.
-3. Open `src/components/GiscusComments.tsx` and replace the placeholder strings:
+GitHub Discussions is enabled on this repo and `src/components/GiscusComments.tsx` is configured to use the "Announcements" category. The only remaining step is to install the giscus GitHub App so it can create/read discussions on your behalf:
 
-```tsx
-// Before
-repo="OWNER/REPO"
-repoId="REPO_ID"
-category="Announcements"
-categoryId="CATEGORY_ID"
+1. Go to <https://github.com/apps/giscus/installations/new>.
+2. Choose the `AttilaMihaly/blog` repository (or "All repositories" if you prefer) and confirm.
 
-// After (example)
-repo="AttilaMihaly/blog"
-repoId="R_kgDO..."
-category="General"
-categoryId="DIC_kwDO..."
-```
+If you ever need to reconfigure (different repo, category, or theme), rerun the wizard at <https://giscus.app> and update the props in `GiscusComments.tsx` accordingly.
 
 ### 2. Cloudflare Pages deployment
 
