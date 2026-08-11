@@ -4,7 +4,7 @@ description: "Agentic tools made me faster. My team didn't get faster. Here's wh
 dek: "Agentic tools made me faster. My team didn't get faster. Here's where I think the gap comes from."
 kicker: "Essay"
 pubDate: "2026-08-11"
-tokens: "3,373"
+tokens: "3,369"
 readTime: "12 min"
 issue: "029"
 tags: ["ai", "software-engineering", "coordination", "morphir"]
@@ -44,7 +44,7 @@ Amdahl's law says that when you speed up one part of a system, your total gain i
 
 We apply this rigorously to code. We ask what fraction of the runtime a function accounts for before we optimize it, because we learned the hard way that optimizing the wrong function is wasted effort.
 
-Then we walk into the AI conversation and skip that step. Not because the denominator is unmeasurable, and not because nobody has measured it — value stream mapping and flow metrics have been decomposing delivery cycles for decades. Mik Kersten's Flow Framework even gives the ratio a name, flow efficiency, and the recurring finding is that most of the elapsed time is waiting, not working. What we skip is putting the two halves together. We reach for the speedup without asking what fraction of the cycle it applies to.
+Then we walk into the AI conversation and skip that step. Not because the denominator is unmeasurable, and not because nobody has measured it — value stream mapping and flow metrics have been decomposing delivery cycles for decades. Mik Kersten's Flow Framework names the ratio flow efficiency, and the recurring finding is that most of the elapsed time is waiting, not working. What we skip is putting the two halves together. We reach for the speedup without asking what fraction of the cycle it applies to.
 
 > The gains are real. They're just landing on the part of the work that was never the constraint.
 
