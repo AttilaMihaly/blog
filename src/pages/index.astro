@@ -56,7 +56,9 @@ function fmtDateShort(d: Date) {
         {lead.data.dek && (
           <p class="display italic home-lead__dek">{lead.data.dek}</p>
         )}
-        <p class="home-lead__snip">{lead.data.description}</p>
+        {lead.data.description !== lead.data.dek && (
+          <p class="home-lead__snip">{lead.data.description}</p>
+        )}
         <div class="home-lead__meta">
           <a href={`/blog/${lead.id}`} style="border-bottom: 1px solid var(--ink);">Read the essay</a>
           <span>·</span>
