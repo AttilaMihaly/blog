@@ -4,8 +4,8 @@ description: "Agentic tools made me faster. My team didn't get faster. Here's wh
 dek: "Agentic tools made me faster. My team didn't get faster. Here's where I think the gap comes from."
 kicker: "Essay"
 pubDate: "2026-08-11"
-tokens: "2,589"
-readTime: "9 min"
+tokens: "3,189"
+readTime: "11 min"
 issue: "029"
 tags: ["ai", "software-engineering", "coordination", "morphir"]
 ---
@@ -44,7 +44,7 @@ Amdahl's law says that when you speed up one part of a system, your total gain i
 
 We apply this rigorously to code. We ask what fraction of the runtime a function accounts for before we optimize it, because we learned the hard way that optimizing the wrong function is wasted effort.
 
-Then we walk into the AI conversation and skip that step entirely. I have not seen a serious attempt to measure what fraction of a delivery cycle is code production before concluding that faster code production is the win.
+Then we walk into the AI conversation and skip that step. Not because the denominator is unmeasurable, and not because nobody has measured it — value stream mapping and flow metrics have been decomposing delivery cycles for decades, and they keep landing on the same answer: most of the elapsed time is waiting, not working. What we skip is putting the two halves together. We reach for the speedup without asking what fraction of the cycle it applies to.
 
 > The gains are real. They're just landing on the part of the work that was never the constraint.
 
@@ -54,17 +54,23 @@ The measurement here is genuinely unsettled and I'd rather show that than preten
 
 METR ran a randomized controlled trial on experienced developers working real issues in their own repositories. Their 2025 result showed a slowdown; their February 2026 follow-up estimates a speedup for the developers who returned. METR flags the earlier result as historical and notes selection effects in the newer data, with confidence intervals wide enough to include no effect at all. My reading is that individual gains are probably real now and smaller than the marketing suggests.
 
-One finding from the original study survived, and it's the one I keep thinking about. Developers estimated a 24% speedup beforehand and reported a 20% speedup afterwards, while the measurement said otherwise. Whichever direction the true effect runs, we apparently can't detect it by asking people how it feels — which is most of what enterprise AI strategy currently rests on.
+One number from that study stuck with me, and I want to be careful about what it can carry. Developers estimated a 24% speedup beforehand and reported a 20% speedup afterwards, and both diverged from what was measured. That gap was defined against the 2025 result, so retiring the result retires the gap along with it — I can't hold it up as a standing fact about the tools people are using today. What it is, is a caution. In the one setting where self-report could be checked against measurement, it didn't match, in either direction. And self-report is most of what enterprise AI strategy currently rests on.
 
-The code itself may be a better witness. GitClear measures change patterns across a large commit dataset, and their 2026 report describes duplicated blocks at the highest level they've recorded, refactoring falling from 21% of changed lines in 2022 to under 4%, copy/paste rising, and function connectivity — how often new code calls into code that already exists — down 35% since 2023. This is one vendor's dataset and worth reading with that in mind.
+The code itself may be a better witness. GitClear measures change patterns across a large commit dataset, and their 2026 report describes duplicated blocks at the highest level they've recorded, refactoring falling from 21% of changed lines in 2022 to under 4%, copy/paste rising, and function connectivity — how often new code calls into code that already exists — down 35% since 2023. Of course, this is one vendor's dataset — and the vendor sells code-quality analytics, so a report announcing that code quality is declining is commercially convenient for them. I'm citing it because the measurements underneath are mechanical and the direction matches what I see, not because the source is disinterested.
 
 But notice what those metrics measure. Not whether code is good. Whether a change fits into what somebody else already built. They're all moving one way while individual output moves the other, and that's closer to a reconciliation problem than a capability one.
+
+There's one more source, and it measures much closer to what I'm actually arguing about. DORA surveys organizations rather than individuals, and reports delivery outcomes rather than keystrokes. Their 2024 report found AI adoption associated with worse throughput *and* worse stability. In the 2025 report, "State of AI-assisted Software Development," the throughput relationship had flipped positive — people and teams learning where the tools help — while the stability relationship had not moved at all: higher AI adoption still tracks with more delivery instability. Their own framing is that AI is an amplifier, magnifying whatever an organization already is, and that the returns come from the surrounding system rather than from the tools.
+
+Half of that cuts against me and I'd rather say so plainly. Throughput is up, at the organizational level, which is precisely where I claimed the gains would fail to land.
+
+But notice which half moved. Teams got faster at producing change and no better at absorbing it, and DORA puts the instability down to change volume arriving faster than the systems around it can verify. That is a reconciliation problem wearing different clothes. Notice the shape of the evidence, too: 90% of their respondents use AI, more than 80% believe it has made them more productive, and the system-level numbers still split. All of those can be true at once — that's the point. Individual conviction, however widespread, doesn't tell you what happened to the system. It's the self-report gap again, at organizational scale, and this version isn't retired.
 
 ## But Maybe It's Just Early
 
 The obvious objection is that this is a J-curve — learning cost now, payoff later. This is roughly what the productivity paradox looked like in 1987, when Solow observed that computers were visible everywhere except in the productivity statistics, and it took years to resolve.
 
-I take that seriously and I can't rule it out from inside it. But the J-curve explanation predicts something specific: the constraint is unfamiliarity, so the gap closes as familiarity grows. That's testable, and I don't see it closing where familiarity is highest. I could be looking at too small a sample.
+I take that seriously, and the DORA throughput flip is the best evidence for it I know of — negative one year, positive the next, which is exactly what a learning curve resolving looks like. But the J-curve explanation predicts that the whole gap closes as familiarity grows, and stability didn't move when throughput did. If unfamiliarity were the binding constraint, I'd expect both to recover together, and adoption is now near-universal. I could be reading two years of survey data too hard.
 
 ## The Only Reader
 
@@ -102,7 +108,7 @@ I'd rather be clear about what this is. It's a bet on one shape of answer to a p
 
 > **Important note:** none of this says capability doesn't matter. If capability keeps compounding while our ability to reconcile decisions stays where it is, that's not obviously a safer place to be. My claim is narrower — that capability may not be where the remaining organizational gains are, and we're spending as if it clearly were.
 
-Here's what would change my mind. If organizations adopting agentic coding show durable gains in both throughput and stability, without changing how decisions get made or how specifications are represented, then code production was the constraint and I was looking in the wrong place.
+Here's what would change my mind. If organizations adopting agentic coding show durable gains in both throughput and stability, without changing how decisions get made or how specifications are represented, then code production was the constraint and I was looking in the wrong place. DORA is effectively running that test in public, one year at a time. Two reports in, it reads as half. If the stability half catches up on its own, I'm wrong.
 
 If you're working on the reconciliation side of this — in tooling, in specification languages, in anything that treats the gap between people as the engineering problem rather than the overhead — I'd like to hear from you.
 
@@ -120,3 +126,5 @@ What do you think?
 - Joel Becker, Nate Rush, Beth Barnes, David Rein, "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity," METR, July 2025. [Blog](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/) · [arXiv:2507.09089](https://arxiv.org/abs/2507.09089)
 - METR, "We Are Changing Our Developer Productivity Experiment Design," February 2026. [Blog](https://metr.org/blog/2026-02-24-uplift-update/)
 - GitClear, "The Maintainability Gap: 2026 AI Code Quality Research." [Report](https://www.gitclear.com/the_ai_code_quality_maintainability_gap)
+- DORA, *Accelerate State of DevOps Report 2024*. [Report](https://dora.dev/research/2024/dora-report/)
+- DORA, *State of AI-assisted Software Development*, September 2025. [Report](https://dora.dev/research/2025/dora-report/)
