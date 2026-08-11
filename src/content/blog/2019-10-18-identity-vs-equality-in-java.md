@@ -1,8 +1,10 @@
 ---
 title: "Identity vs. Equality in Java"
 description: "Keying equals() and hashCode() off an ID field is such a common Java pattern that it reads as correct — but identity is external and referential, while equality is structural, and conflating them can quietly cost you real money."
-pubDate: "2019-10-18"
 kicker: "Archive"
+pubDate: "2019-10-18"
+tokens: "937"
+readTime: "4 min"
 ---
 
 **Key Takeaways**

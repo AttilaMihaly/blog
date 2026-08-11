@@ -1,8 +1,10 @@
 ---
 title: "In-memory or not"
 description: "Moving data into memory to process it is such a basic assumption that no one questions it — but moving logic to where the data already lives would be far more efficient, if only we had a language that made it practical."
-pubDate: "2013-09-07"
 kicker: "Archive"
+pubDate: "2013-09-07"
+tokens: "314"
+readTime: "2 min"
 ---
 
 When you start learning a new programming language no one even bothers to state the obvious: data has to be in memory in order to process it. Of course, data doesn't live in memory, so you have to bring it there. You write JDBC code to read from relational databases, XML parsers to process messages or do plain file processing. The standard scheme is:

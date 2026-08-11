@@ -1,9 +1,8 @@
 ---
 title: "The Bottleneck Was Never the Code"
 description: "Agentic tools made me faster. My team didn't get faster. Here's where I think the gap comes from."
-pubDate: 2026-08-08
 tags: ["ai", "software-engineering", "coordination", "morphir"]
-draft: true
+status: ready
 ---
 
 For most of my career I believed a simple thing: to make a team faster, make each engineer faster. Better languages, better tools, better abstractions. Of course I believed it — it worked, over and over, for twenty years.
@@ -116,25 +115,3 @@ What do you think?
 - Joel Becker, Nate Rush, Beth Barnes, David Rein, "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity," METR, July 2025. [Blog](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/) · [arXiv:2507.09089](https://arxiv.org/abs/2507.09089)
 - METR, "We Are Changing Our Developer Productivity Experiment Design," February 2026. [Blog](https://metr.org/blog/2026-02-24-uplift-update/)
 - GitClear, "The Maintainability Gap: 2026 AI Code Quality Research." [Report](https://www.gitclear.com/the_ai_code_quality_maintainability_gap)
-
----
-
-<!--
-NOTES BEFORE PUBLISHING
-
-Fill in with your own material:
-- The opening is stronger with a specific memory than a general claim about your career — a project where you optimized individual throughput and the team didn't get faster.
-- "My team is not meaningfully faster" is deliberately unspecific. If you can make it concrete without naming your employer, that line carries the post.
-
-Verify:
-- METR July 2025: 16 devs, 246 tasks, forecast 24% speedup, self-reported 20% speedup, measured 19% slowdown (CI +2% to +39%).
-- METR Feb 2026: returning cohort -18% (CI -38% to +9%), new cohort -4% (CI -15% to +9%). I deliberately kept the numbers out of the prose and described the direction instead — putting the figures back in invites an argument the post doesn't need.
-- GitClear figures from their 2026 maintainability report. Read the methodology before publishing; I'm working from their summary page.
-- I dropped an earlier claim that per-developer code volume is up ~75%. It circulates widely but traces to a secondary aggregator, and GitClear's own figure is ~10% more durable code since 2022. Don't reintroduce it.
-- Semmelweis: spelling is Ignaz Philipp Semmelweis (Hungarian: Semmelweis Ignác Fülöp), 1818–1865. Chlorinated lime handwashing introduced at Vienna General Hospital's First Obstetrical Clinic in 1847; doctors' wards had roughly three times the mortality of the midwives' wards beforehand. Sources put the drop at somewhere between 12–18% down to 1–2%, so "double digits to around two percent" is the safe phrasing. He was forced out of Vienna in 1849 and published his book in 1861. Handwashing became routine around 1890 via germ theory, so the ~40 year figure holds.
-- Solow 1987 — paraphrased, not quoted. Check wording if you quote directly.
-
-Decide:
-- Whether to name Morgan Stanley or keep the regulatory example generic. Check the external-writing policy first.
-- Correct public link for Substrate.
--->

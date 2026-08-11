@@ -1,10 +1,9 @@
 # Completed
 
 - [The Bottleneck Was Never the Code](02-bottleneck-was-never-the-code/article.md) — published 2026-08-08
+- [Who Owns Your Knowledge?](01-who-owns-your-knowledge/article.md) — published 2026-05-11
 
 # In progress
-
-- Who owns your knowledge?
 
 # Backlog
 - Consistency of software developers vs LLMs

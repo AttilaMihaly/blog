@@ -1,0 +1,71 @@
+---
+import Masthead from '../components/Masthead.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import '../styles/global.css';
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="About Attila Mihaly and The Invariable Difference." />
+  <title>About — The Invariable Difference</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body class="dir-b">
+  <Masthead currentPage="about" />
+
+  <main class="page-main">
+    <div class="eyebrow accent" style="text-align: center; margin: 40px 0 12px;">About</div>
+    <h1 class="display page-title">Attila Mihaly</h1>
+    <div class="rule-soft" style="max-width: 56px; margin: 24px auto 40px;"></div>
+
+    <div class="article-body">
+      <p>
+        The Invariable Difference is a journal about programming languages, domain
+        modeling, and the boundary between what people know and what software
+        systems can represent. It's the continuation of an earlier blog,
+        <a href="/archive">Ozmium</a>, running since 2010.
+      </p>
+      <p>
+        I write about type systems, specifications, decision tables, and — more
+        recently — where large language models help and where they quietly move
+        the goalposts. Current work centers on Morphir and Substrate, markdown-native
+        specifications that domain experts can author directly.
+      </p>
+      <p>
+        Get in touch at <a href="mailto:attila.mihaly.jr@gmail.com">attila.mihaly.jr@gmail.com</a>,
+        or subscribe via the <a href="/feed.xml">Atom feed</a>.
+      </p>
+    </div>
+  </main>
+
+  <SiteFooter />
+</body>
+</html>
+
+<style>
+.page-main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 64px 80px;
+}
+.page-title {
+  font-size: 56px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .page-main { padding-left: 28px; padding-right: 28px; }
+}
+
+@media (max-width: 640px) {
+  .page-main { padding-left: 16px; padding-right: 16px; padding-bottom: 48px; }
+  .page-title { font-size: 36px; }
+}
+</style>

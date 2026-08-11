@@ -1,6 +1,6 @@
 ---
 interface Props {
-  currentPage?: 'index' | 'archive' | 'topics' | 'post';
+  currentPage?: 'index' | 'archive' | 'topics' | 'post' | 'about' | 'colophon';
 }
 const { currentPage } = Astro.props;
 ---
@@ -10,8 +10,8 @@ const { currentPage } = Astro.props;
     <nav class="mast__nav mast__nav--left">
       <a href="/" class:list={['mast__link', { 'mast__link--active': currentPage === 'index' }]}>Index</a>
       <a href="/archive" class:list={['mast__link', { 'mast__link--active': currentPage === 'archive' }]}>Archive</a>
-      <a href="/topics" class="mast__link">Topics</a>
-      <a href="/colophon" class="mast__link">Colophon</a>
+      <a href="/topics" class:list={['mast__link', { 'mast__link--active': currentPage === 'topics' }]}>Topics</a>
+      <a href="/colophon" class:list={['mast__link', { 'mast__link--active': currentPage === 'colophon' }]}>Colophon</a>
     </nav>
     <div class="mast__title">
       <a href="/" class="mast__name display italic">The Invariable Difference</a>
@@ -19,7 +19,7 @@ const { currentPage } = Astro.props;
     </div>
     <nav class="mast__nav mast__nav--right">
       <a href="/feed.xml" class="mast__link">Feed</a>
-      <a href="/about" class="mast__link">About</a>
+      <a href="/about" class:list={['mast__link', { 'mast__link--active': currentPage === 'about' }]}>About</a>
     </nav>
   </div>
 </header>

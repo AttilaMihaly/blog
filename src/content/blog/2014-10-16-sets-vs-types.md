@@ -1,8 +1,10 @@
 ---
 title: "Sets vs Types"
 description: "Types and sets both group things, but sets are defined by a membership relation attached to values, while types have to be predefined before any value exists. What happens when you try to bring membership back into a type system?"
-pubDate: "2014-10-16"
 kicker: "Archive"
+pubDate: "2014-10-16"
+tokens: "1,069"
+readTime: "4 min"
 ---
 
 Sets and types are very closely related concepts but not exactly the same. They are both used to group things but while sets can include **all kinds of different things** types usually include only things that are **similar in some way**. This similarity allows us to handle all members uniformly and apply operations without knowing the exact value of a variable.

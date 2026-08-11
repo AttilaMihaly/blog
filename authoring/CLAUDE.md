@@ -9,7 +9,7 @@ Topics are tracked in `README.md` with three sections: **Backlog**, **In progres
 
 ## Directory Setup
 
-When a topic moves to **In progress**, create a dedicated directory for it under `context/blog/`:
+When a topic moves to **In progress**, create a dedicated directory for it under `authoring/`:
 
 - Name format: `<sequence_number>-<slug>` where the sequence number is the next available integer (1-based, zero-padded to 2 digits if needed), and the slug is a short kebab-case version of the topic title.
 - Example: `01-who-owns-your-knowledge/`

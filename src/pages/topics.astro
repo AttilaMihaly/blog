@@ -1,0 +1,156 @@
+---
+import { getCollection } from 'astro:content';
+import Masthead from '../components/Masthead.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import '../styles/global.css';
+
+const allPosts = await getCollection('blog');
+allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+function slugify(tag: string) {
+  return tag.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-+|-+$)/g, '');
+}
+
+const byTag = new Map<string, { label: string; posts: typeof allPosts }>();
+for (const post of allPosts) {
+  for (const tag of post.data.tags) {
+    const slug = slugify(tag);
+    if (!byTag.has(slug)) byTag.set(slug, { label: tag, posts: [] });
+    byTag.get(slug)!.posts.push(post);
+  }
+}
+const tags = [...byTag.entries()].sort((a, b) => b[1].posts.length - a[1].posts.length);
+
+function fmtShort(d: Date) {
+  return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+}
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Topics — The Invariable Difference</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body class="dir-b">
+  <Masthead currentPage="topics" />
+
+  <main class="topics-main">
+    <section class="topics-hero">
+      <div class="eyebrow accent" style="margin-bottom: 14px;">
+        Topics · {tags.length} {tags.length === 1 ? 'tag' : 'tags'}
+      </div>
+      <h1 class="display italic topics-hero__title">By subject</h1>
+      <p class="display italic topics-hero__sub">everything, grouped by what it's actually about</p>
+    </section>
+
+    <div class="rule"></div>
+
+    {tags.length === 0 && (
+      <p class="topics-empty">No tagged posts yet. Tags are set in each draft's frontmatter and flow through on publish.</p>
+    )}
+
+    {tags.map(([slug, { label, posts }]) => (
+      <section class="topics-group" id={slug} key={slug}>
+        <div class="topics-group__grid">
+          <div class="eyebrow accent topics-group__label">{label}</div>
+          <div>
+            <div class="eyebrow" style="margin-bottom: 18px;">{posts.length} {posts.length === 1 ? 'entry' : 'entries'}</div>
+            {posts.map((p) => (
+              <div class="topics-entry" key={p.id}>
+                <span class="mono topics-entry__date">{fmtShort(p.data.pubDate)}</span>
+                <a href={`/blog/${p.id}`} class="display topics-entry__title">{p.data.title}</a>
+                <span class="eyebrow">{p.data.kicker ?? 'Post'}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    ))}
+  </main>
+
+  <SiteFooter />
+</body>
+</html>
+
+<style>
+.topics-main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 64px;
+}
+.topics-hero {
+  padding: 40px 0 28px;
+  text-align: center;
+}
+.topics-hero__title {
+  font-size: 80px;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+}
+.topics-hero__sub {
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 540px;
+  margin: 14px auto 0;
+}
+.topics-empty {
+  padding: 40px 0;
+  color: var(--muted);
+  font-size: 16px;
+}
+.topics-group {
+  padding: 24px 0 32px;
+  border-top: 1px solid var(--ink);
+}
+.topics-group__grid {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 56px;
+}
+.topics-group__label {
+  position: sticky;
+  top: 24px;
+  align-self: start;
+  font-size: 13px;
+}
+.topics-entry {
+  display: grid;
+  grid-template-columns: 110px 1fr 90px;
+  gap: 16px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.topics-entry__date { color: var(--muted); font-size: 12px; }
+.topics-entry__title {
+  font-size: 21px;
+  line-height: 1.2;
+  letter-spacing: -0.018em;
+  border-bottom: none;
+}
+.topics-entry__title:hover { color: var(--accent); }
+
+@media (max-width: 900px) {
+  .topics-main { padding-left: 28px; padding-right: 28px; }
+  .topics-group__grid { grid-template-columns: 1fr; gap: 12px; }
+  .topics-group__label { position: static; }
+}
+
+@media (max-width: 640px) {
+  .topics-main { padding-left: 16px; padding-right: 16px; }
+  .topics-hero { padding: 28px 0 20px; }
+  .topics-hero__title { font-size: 50px; }
+  .topics-hero__sub { font-size: 19px; }
+  .topics-entry {
+    grid-template-columns: 1fr auto;
+    gap: 6px 12px;
+  }
+  .topics-entry__title { grid-column: 1 / -1; order: 1; font-size: 18px; }
+}
+</style>

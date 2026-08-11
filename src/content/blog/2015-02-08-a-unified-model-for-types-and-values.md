@@ -1,8 +1,10 @@
 ---
 title: "A Unified Model for Types and Values"
 description: "If the graph structure of types looks exactly like the graph structure of values, the same reduction rules and evaluation techniques should work for both — which means type inference and expression evaluation can become the same operation."
-pubDate: "2015-02-08"
 kicker: "Archive"
+pubDate: "2015-02-08"
+tokens: "663"
+readTime: "3 min"
 ---
 
 In one of my previous posts I presented a model that can describe any kind of logic using a relatively simple graph structure. This was one of the examples:

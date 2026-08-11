@@ -1,8 +1,10 @@
 ---
 title: "Gods of Creation"
 description: "A confession about what actually made OOP so seductive — not that objects modeled the real world well, but that the 'new' keyword felt like creating life, and that's a hard thing for any developer to give up."
-pubDate: "2013-09-24"
 kicker: "Archive"
+pubDate: "2013-09-24"
+tokens: "453"
+readTime: "2 min"
 ---
 
 One of these days I was thinking about why OOP has become so popular and why do people have emotional attachment to it. What does it give them that other disciplines cannot provide? Then I realized I should really ask myself since I was a believer myself. What did I enjoy most about working with OOP?

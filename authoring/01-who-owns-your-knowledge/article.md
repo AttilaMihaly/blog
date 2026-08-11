@@ -1,3 +1,10 @@
+---
+title: "Who Owns Your Knowledge?"
+description: "On the slow, quiet privatization of expertise in the age of useful tools."
+tags: []
+status: ready
+---
+
 # Who Owns Your Knowledge?
 
 Something has shifted in the last couple of years. Thinking without AI, apparently, has been cancelled.

@@ -1,8 +1,10 @@
 ---
 title: "Scaling People"
 description: "Teams don't scale horizontally past a certain size, and developers can't type any faster either. If seniority is mostly a matter of recognizing patterns, the patterns — not the typing — are what's worth automating."
-pubDate: "2015-06-08"
 kicker: "Archive"
+pubDate: "2015-06-08"
+tokens: "557"
+readTime: "3 min"
 ---
 
 Complexity in our software systems is growing and the only solution we seem to have is to throw more developers at the problem. Universities are mass producing developers but they cannot keep up with the demand. Even if they could though we would still have a difficulty with coordinating the masses of developers. Productivity in large teams suffers because there is a limit to how many people can work together efficiently. Building smaller teams might alleviate some of those issues but then coordinating those smaller teams becomes an issue. It seems that **people just don't scale horizontally** beyond a certain limit.

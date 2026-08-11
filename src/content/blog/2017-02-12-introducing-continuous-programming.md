@@ -1,8 +1,10 @@
 ---
 title: "Introducing Continuous Programming"
 description: "We built continuous integration and delivery around our code, but coding itself is still edit-then-compile-then-see. Relational databases figured out atomic, non-disruptive change decades ago — what if languages worked that way too?"
-pubDate: "2017-02-12"
 kicker: "Archive"
+pubDate: "2017-02-12"
+tokens: "272"
+readTime: "2 min"
 ---
 
 As software developers we continuously strive to speed up our delivery pipeline to cope with the ever increasing demand for software. Continuous Integration and Delivery are essential tools for that and by now they became an industry wide standard. When it comes to coding though we still edit text files and then hand it to a compiler or interpreter to see whether it does what we expect it to do. This process in not continuous at all and it creates a lot of friction that goes well beyond our local development environment.

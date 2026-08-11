@@ -1,8 +1,10 @@
 ---
 title: "What is a Unit Type?"
 description: "Functional languages treat the unit type as barely more than void, yet it demonstrably contains exactly one value — which makes it stranger, and more useful, than it first appears. There isn't one unit type. There are infinitely many."
-pubDate: "2016-02-22"
 kicker: "Archive"
+pubDate: "2016-02-22"
+tokens: "546"
+readTime: "3 min"
 ---
 
 A few days ago I was reading up on basic type theory concepts on Wikipedia when I stumbled upon the relationship between sum types and enumerations. Sum types are also called tagged unions which is a much more meaningful name. They combine multiple types while also assigning a tag to each of them. Enumerations therefore can be considered as a special case of tagged unions where the tags represent each enumeration value and the associated type is a unit type.

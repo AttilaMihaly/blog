@@ -1,8 +1,10 @@
 ---
 title: "Programming at its Core"
 description: "SQL and spreadsheets solve a huge range of real-world problems with nothing but basic data manipulation operators, while general-purpose languages drifted toward hardware concerns and left ordinary users behind. What would a language look like that stayed in that intersection?"
-pubDate: "2014-12-06"
 kicker: "Archive"
+pubDate: "2014-12-06"
+tokens: "1,103"
+readTime: "5 min"
 ---
 
 ## The basic features

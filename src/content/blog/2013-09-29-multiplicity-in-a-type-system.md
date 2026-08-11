@@ -1,8 +1,10 @@
 ---
 title: "Multiplicity in a Type System"
 description: "Lists, options and single values are usually treated as unrelated container types, but they're really the same value at different multiplicities. What happens if a language makes multiplicity a first-class, explicit part of every type?"
-pubDate: "2013-09-29"
 kicker: "Archive"
+pubDate: "2013-09-29"
+tokens: "1,006"
+readTime: "4 min"
 ---
 
 ## Collections and other types

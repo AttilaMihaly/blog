@@ -1,8 +1,10 @@
 ---
 title: "Breaking the Rewrite Cycle Through Logic Modeling"
 description: "Enterprises burn enormous resources rewriting applications from scratch every few years, mostly to reimplement business rules that never actually changed. The waste starts the moment business logic gets lost in translation to a specific technology stack."
-pubDate: "2017-02-03"
 kicker: "Archive"
+pubDate: "2017-02-03"
+tokens: "479"
+readTime: "2 min"
 ---
 
 Large enterprises spend massive amounts of resources on periodic rewrites of their internal applications to keep up with the changes in the business and advances in technology. While these projects usually introduce some new functionality there's usually a large number of existing business rules that need to be kept intact.

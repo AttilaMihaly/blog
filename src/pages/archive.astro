@@ -60,9 +60,7 @@ function fmtShort(d: Date) {
     <section class="archive-tabs">
       <div class="archive-tabs__inner">
         <span class="archive-tab archive-tab--active">By year</span>
-        <a href="#" class="archive-tab">By topic</a>
-        <a href="#" class="archive-tab">By kind</a>
-        <a href="#" class="archive-tab">By token count</a>
+        <a href="/topics" class="archive-tab">By topic</a>
         <span class="archive-tabs__total">
           Total: <span class="num" style="color: var(--ink);">{fmtTotal}</span> tokens read
         </span>
@@ -89,21 +87,6 @@ function fmtShort(d: Date) {
         </div>
       </section>
     ))}
-
-    <!-- Earlier years stub -->
-    <section class="archive-year archive-year--earlier">
-      <div class="archive-year__grid">
-        <div class="display italic archive-year__label archive-year__label--muted">10–23</div>
-        <div>
-          <div class="eyebrow" style="margin-bottom: 14px;">Earlier years · writing in progress</div>
-          <p class="display italic" style="font-size: 19px; line-height: 1.5; color: var(--muted); max-width: 540px;">
-            Earlier entries are being migrated from the previous archive. A few I would no longer write
-            the same way. I have not edited them.
-          </p>
-          <a href="#" class="eyebrow" style="display: inline-block; margin-top: 16px; border-bottom: 1px solid var(--rule-soft);">Browse earlier years →</a>
-        </div>
-      </div>
-    </section>
   </main>
 
   <SiteFooter />
@@ -160,7 +143,6 @@ function fmtShort(d: Date) {
   padding: 24px 0 32px;
   border-top: 1px solid var(--ink);
 }
-.archive-year--earlier { border-top-color: var(--rule-soft); }
 .archive-year__grid {
   display: grid;
   grid-template-columns: 120px 1fr;
@@ -175,7 +157,6 @@ function fmtShort(d: Date) {
   top: 24px;
   align-self: start;
 }
-.archive-year__label--muted { color: var(--muted); }
 .archive-entry {
   display: grid;
   grid-template-columns: 68px 68px 1fr 90px 80px;

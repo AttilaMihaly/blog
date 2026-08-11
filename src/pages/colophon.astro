@@ -1,0 +1,83 @@
+---
+import Masthead from '../components/Masthead.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import '../styles/global.css';
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="How The Invariable Difference is built." />
+  <title>Colophon — The Invariable Difference</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body class="dir-b">
+  <Masthead currentPage="colophon" />
+
+  <main class="page-main">
+    <div class="eyebrow accent" style="text-align: center; margin: 40px 0 12px;">Colophon</div>
+    <h1 class="display page-title">How this is built</h1>
+    <div class="rule-soft" style="max-width: 56px; margin: 24px auto 40px;"></div>
+
+    <div class="article-body">
+      <p>
+        Built with <a href="https://astro.build" target="_blank" rel="noopener">Astro</a>,
+        with <a href="https://react.dev" target="_blank" rel="noopener">React</a> islands
+        for the interactive pieces, essays authored in Markdown/MDX, and
+        <a href="https://tailwindcss.com" target="_blank" rel="noopener">Tailwind CSS</a>
+        for layout. Comments run on
+        <a href="https://giscus.app" target="_blank" rel="noopener">Giscus</a>, backed by
+        GitHub Discussions. Hosted on Cloudflare Pages, deployed from GitHub Actions.
+      </p>
+      <p>
+        Display type is <a href="https://fonts.google.com/specimen/Newsreader" target="_blank" rel="noopener">Newsreader</a>,
+        body text is <a href="https://fonts.google.com/specimen/Inter" target="_blank" rel="noopener">Inter</a>,
+        and numbers, dates, and code run in
+        <a href="https://fonts.google.com/specimen/IBM+Plex+Mono" target="_blank" rel="noopener">IBM Plex Mono</a>.
+      </p>
+      <p>
+        Posts are drafted in <code>authoring/</code> and go through a small
+        publishing pipeline before landing in <code>src/content/blog/</code>: a
+        script projects draft frontmatter into the site's schema, computes token
+        counts and read time from the actual text, assigns the next issue number,
+        and opens a pull request with a preview deploy. The token count shown on
+        every post is a real count from the same tokenizer, not a guess.
+      </p>
+      <p>
+        Earlier writing, from 2010 through 2019, is archived from the original
+        <a href="/archive">Ozmium</a> blog with its original text, lightly
+        re-formatted for this site.
+      </p>
+    </div>
+  </main>
+
+  <SiteFooter />
+</body>
+</html>
+
+<style>
+.page-main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 64px 80px;
+}
+.page-title {
+  font-size: 56px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .page-main { padding-left: 28px; padding-right: 28px; }
+}
+
+@media (max-width: 640px) {
+  .page-main { padding-left: 16px; padding-right: 16px; padding-bottom: 48px; }
+  .page-title { font-size: 36px; }
+}
+</style>

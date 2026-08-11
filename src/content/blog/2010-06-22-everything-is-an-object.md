@@ -1,8 +1,10 @@
 ---
 title: "Everything is an Object"
 description: "OOP promised that state and behavior belong together because that's how the real world works. In practice most codebases separate them into data-only POJOs and logic-only services — so where exactly did that promise break?"
-pubDate: "2010-06-22"
 kicker: "Archive"
+pubDate: "2010-06-22"
+tokens: "297"
+readTime: "2 min"
 ---
 
 When I started programming a lot of OOP languages were already available. Everyone knew that the only right way to write code is to treat data and logic as one single block. The promise of OOP was that it will be able to model real world problems very easily, because everything in the real world is an object anyway. Objects have a state and actions that you can perform on them. For example, a car has fuel level as part of its state and you can move it forward, turn left and do a lot of other things with it, but all of these are actions. Simple, right?

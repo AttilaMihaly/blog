@@ -1,8 +1,10 @@
 ---
 title: "A Unified Model for Data and Logic"
 description: "RDF triples are an elegant knowledge representation, but they leak the moment a statement relates more than two things. Extending triples to tuples fixes the leak and produces a graph model that unifies data and logic under one traversal semantics."
-pubDate: "2015-01-17"
 kicker: "Archive"
+pubDate: "2015-01-17"
+tokens: "1,341"
+readTime: "5 min"
 ---
 
 ## The RDF model

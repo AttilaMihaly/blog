@@ -1,8 +1,10 @@
 ---
 title: "Is there anything beyond UML?"
 description: "UML was built for a mutable, object-oriented world that functional programming and agile prototyping have both left behind. That doesn't mean modeling languages are obsolete — it means we still haven't found what replaces UML."
-pubDate: "2017-02-02"
 kicker: "Archive"
+pubDate: "2017-02-02"
+tokens: "278"
+readTime: "2 min"
 ---
 
 Functional programming is rapidly becoming mainstream and UML is fading away at the same pace.

@@ -1,8 +1,10 @@
 ---
 title: "Over and over again ..."
 description: "On why software development expertise takes years to acquire, and whether the parts of it that are purely technical could be captured in a model instead of relearned by every developer."
-pubDate: "2010-06-17"
 kicker: "Archive"
+pubDate: "2010-06-17"
+tokens: "681"
+readTime: "3 min"
 ---
 
 ![Software Developer](/images/archive/software_developer.jpg)

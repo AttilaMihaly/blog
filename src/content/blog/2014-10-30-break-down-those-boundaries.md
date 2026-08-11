@@ -1,8 +1,10 @@
 ---
 title: "Break Down Those Boundaries!"
 description: "Software's constant reinvention leaves an industry fragmented by language barriers and impedance mismatches. Scala showed that unifying existing ideas beats inventing new ones — starting with treating logic and data, and types and values, as fundamentally the same thing."
-pubDate: "2014-10-30"
 kicker: "Archive"
+pubDate: "2014-10-30"
+tokens: "698"
+readTime: "3 min"
 ---
 
 As software developers we are constantly pushing the limits of our tooling. We are also very creative so when what we have is not sufficient we simply invent something completely new. We created hundreds of programming languages and we still haven't stopped. We extended relational database as far as we could and now we are moving on to NoSQL. We are always looking for new problems to tackle and we are never looking back.

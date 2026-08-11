@@ -1,8 +1,10 @@
 ---
 title: "The Road to Lambda Core"
 description: "From discovering the Semantic Web as a better domain modeling tool, through the limits of Java and the revelation of Scala's functional programming, to the decision to start building a language of my own."
-pubDate: "2015-01-10"
 kicker: "Archive"
+pubDate: "2015-01-10"
+tokens: "608"
+readTime: "3 min"
 ---
 
 ![Lambda Core](/images/archive/lambda_core.png)

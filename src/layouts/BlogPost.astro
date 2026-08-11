@@ -4,6 +4,7 @@ import SiteFooter from '../components/SiteFooter.astro';
 import '../styles/global.css';
 
 interface Props {
+  id: string;
   title: string;
   description: string;
   pubDate: Date;
@@ -16,7 +17,8 @@ interface Props {
   nextPost?: { id: string; title: string; issue?: string };
 }
 
-const { title, description, pubDate, dek, kicker, tokens, readTime, issue, prevPost, nextPost } = Astro.props;
+const { id, title, description, pubDate, dek, kicker, tokens, readTime, issue, prevPost, nextPost } = Astro.props;
+const ogImage = new URL(`/open-graph/${id}.png`, Astro.site);
 
 function fmtDate(d: Date) {
   return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -30,6 +32,14 @@ function fmtDate(d: Date) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={description} />
   <title>{title} — The Invariable Difference</title>
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={dek ?? description} />
+  <meta property="og:image" content={ogImage} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={dek ?? description} />
+  <meta name="twitter:image" content={ogImage} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />

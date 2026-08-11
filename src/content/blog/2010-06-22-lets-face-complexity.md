@@ -1,8 +1,10 @@
 ---
 title: "Let's Face Complexity"
 description: "We keep attacking software complexity with new libraries, frameworks and tools, and it keeps growing anyway. Maybe the fix isn't fighting it or hiding it behind magic — it's letting the machine write the repetitive parts for us."
-pubDate: "2010-06-22"
 kicker: "Archive"
+pubDate: "2010-06-22"
+tokens: "646"
+readTime: "3 min"
 ---
 
 ![Cookie Monster](/images/archive/cookie-monster.jpg)
