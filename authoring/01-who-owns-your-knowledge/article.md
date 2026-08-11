@@ -2,7 +2,7 @@
 title: "Who Owns Your Knowledge?"
 description: "On the slow, quiet privatization of expertise in the age of useful tools."
 tags: []
-status: ready
+status: draft
 ---
 
 # Who Owns Your Knowledge?
