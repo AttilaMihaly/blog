@@ -1,8 +1,13 @@
 ---
 title: "The Bottleneck Was Never the Code"
 description: "Agentic tools made me faster. My team didn't get faster. Here's where I think the gap comes from."
+dek: "Agentic tools made me faster. My team didn't get faster. Here's where I think the gap comes from."
+kicker: "Essay"
+pubDate: "2026-08-11"
+tokens: "3,369"
+readTime: "12 min"
+issue: "029"
 tags: ["ai", "software-engineering", "coordination", "morphir"]
-status: ready
 ---
 
 For most of my career I believed a simple thing: to make a team faster, make each engineer faster. Better languages, better tools, better abstractions. Of course I believed it — it worked, over and over, for twenty years.
