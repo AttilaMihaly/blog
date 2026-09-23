@@ -5,6 +5,7 @@
 # In progress
 
 - [The Bottleneck Was Never the Code](02-bottleneck-was-never-the-code/article.md) — pulled back to draft 2026-08-11 (was published 2026-08-08)
+- [Send Me the Prompt](03-send-me-the-prompt/article.md) — started 2026-09-23
 
 # Backlog
 - Consistency of software developers vs LLMs
@@ -13,12 +14,6 @@
 - Verifiable Knowledge
 - In the age of AI the value of ideas is drastically increasing
 - The case for knowledge unification using LLMs
-- Nobody is reading this: AI scaled production, not attention
-  - Trigger (2026-09-23): yet another AI-built dashboard at work. Dozens have appeared because building one is now essentially free, yet nobody has time to look at them.
-  - Content creation sped up; consumption didn't and can't. Human attention is fixed by headcount, and brains don't get faster, certainly not at model speed. Everyone is now competing for the attention of the same people.
-  - Result is a self-serving cycle of producing things nobody reads. Best case, another LLM reads it and summarizes it for a human.
-  - The round trip: human thought → LLM amplifies it with statistical filler drawn from historical human communication → LLM compresses it back to roughly the original prompt, maybe a bit more → same number of humans consume it. Net: resources spent for no obvious benefit.
-  - Angle to explore: output is only as valuable as the attention it earns; what's worth producing when production is free and attention isn't?
 
 # Archive (ozmi.wordpress.com)
 
