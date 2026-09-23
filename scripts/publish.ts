@@ -24,6 +24,7 @@ import {
   stripNotesBlock,
   type PublishContext,
 } from './frontmatter.ts';
+import { recordPublished } from './readme.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -149,55 +150,10 @@ function renderFile(data: Record<string, unknown>, body: string): string {
 
 // -- README.md (Backlog / In progress / Completed) --------------------------------
 
-function normalize(s: string): string {
-  return s.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
-}
-
-function findSection(lines: string[], name: string): [number, number] | null {
-  const idx = lines.findIndex((l) => l.trim() === `# ${name}`);
-  if (idx === -1) return null;
-  let end = lines.length;
-  for (let i = idx + 1; i < lines.length; i++) {
-    if (/^# /.test(lines[i])) {
-      end = i;
-      break;
-    }
-  }
-  return [idx + 1, end];
-}
-
 function updateReadme(authoringDirName: string, title: string, pubDate: string) {
   const text = readFileSync(README_PATH, 'utf8');
-  const linkPath = `${authoringDirName}/article.md`;
-  if (text.includes(`(${linkPath})`)) return; // already recorded as Completed
-
-  const lines = text.split('\n');
-  const normTitle = normalize(title);
-
-  const inProgress = findSection(lines, 'In progress');
-  if (inProgress) {
-    const [start, end] = inProgress;
-    for (let i = start; i < end; i++) {
-      const m = lines[i].match(/^- (.+)$/);
-      if (m && normalize(m[1]) === normTitle) {
-        lines.splice(i, 1);
-        break;
-      }
-    }
-  }
-
-  const newBullet = `- [${title}](${linkPath}) — published ${pubDate}`;
-  const completed = findSection(lines, 'Completed');
-  if (completed) {
-    const [start, end] = completed;
-    let insertAt = end;
-    while (insertAt > start && lines[insertAt - 1].trim() === '') insertAt--;
-    lines.splice(insertAt, 0, newBullet);
-  } else {
-    lines.unshift('# Completed', '', newBullet, '');
-  }
-
-  writeFileSync(README_PATH, lines.join('\n'), 'utf8');
+  const updated = recordPublished(text, authoringDirName, title, pubDate);
+  if (updated !== text) writeFileSync(README_PATH, updated, 'utf8');
 }
 
 // -- core projection: authoring draft -> published file content -------------------
