@@ -15,7 +15,7 @@ What happens to all the stuff nobody has time for? In the best case, another LLM
 
 Notice what survives the trip: only what the human put in. The expansion is exactly the part a model can regenerate at will, which is why the other model throws it away. So why send it at all?
 
-> If your reader has an LLM too, send me the prompt instead.
+> If your reader has an LLM too, send them the prompt instead.
 
 It sounds like a joke. I mean it as a rule. What's scarce is the new information: an observation, a measurement, a decision and the reason behind it. That's usually small, and no model can make it up.
 
@@ -25,4 +25,4 @@ In fact, many of those dashboards did have a reader: the person who built them. 
 
 Cost used to do the filtering for us. Nobody spent two weeks on a dashboard without knowing who it was for. That filter is gone, so we have to apply it on purpose, by asking one question before we make anything: who will act differently because this exists?
 
-If the answer is nobody, don't make it. And please don't send it to me.
+If the answer is nobody, make it, but please don't send it to me.
