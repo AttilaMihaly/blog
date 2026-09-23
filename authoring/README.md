@@ -1,11 +1,11 @@
 # Completed
 
 - [Who Owns Your Knowledge?](01-who-owns-your-knowledge/article.md) — published 2026-05-11
+- [Send Me the Prompt](03-send-me-the-prompt/article.md) — published 2026-09-23
 
 # In progress
 
 - [The Bottleneck Was Never the Code](02-bottleneck-was-never-the-code/article.md) — pulled back to draft 2026-08-11 (was published 2026-08-08)
-- [Send Me the Prompt](03-send-me-the-prompt/article.md) — started 2026-09-23
 
 # Backlog
 - Consistency of software developers vs LLMs

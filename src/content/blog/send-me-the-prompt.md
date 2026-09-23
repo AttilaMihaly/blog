@@ -3,8 +3,10 @@ title: "Send Me the Prompt"
 description: "AI made production free. Attention stayed exactly where it was."
 dek: "AI made production free. Attention stayed exactly where it was."
 kicker: "Essay"
-tags: []
-status: ready
+pubDate: "2026-09-23"
+tokens: "564"
+readTime: "3 min"
+issue: "029"
 ---
 
 Last week I opened yet another dashboard someone at work had built with AI. It was fine. Clean charts, sensible filters. And I realized I had no idea who was supposed to look at it. I've watched dozens of these appear in the last few months, because building one now costs almost nothing. Looking at one still costs exactly what it always did.
