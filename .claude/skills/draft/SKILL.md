@@ -18,14 +18,19 @@ Knowledge") or a new topic not yet in the backlog.
    remove it from Backlog. If the topic isn't in the backlog at all, that's fine —
    just proceed with it as a new topic.
 
-2. **Move it to In progress.** Add `- <topic title>` under `# In progress` in
-   `authoring/README.md`. Keep it there until the user explicitly says the draft
-   is complete and ready to publish — moving to `# Completed` is `publish`'s job,
-   not this skill's.
-
-3. **Allocate the next sequence number.** Look at existing `authoring/<NN>-<slug>/`
+2. **Allocate the next sequence number.** Look at existing `authoring/<NN>-<slug>/`
    directories (ignore `authoring/archive/`) and pick the next integer, zero-padded
    to 2 digits.
+
+3. **Move it to In progress.** Add this line under `# In progress` in
+   `authoring/README.md`, using today's date:
+   ```
+   - [<Topic Title>](<NN>-<slug>/article.md) — started YYYY-MM-DD
+   ```
+   Keep it there until the user explicitly says the draft is complete and ready
+   to publish — moving to `# Completed` is `publish`'s job, not this skill's.
+   `scripts/readme.ts` finds the entry by its link path (or, failing that, by
+   title), so the title can change during drafting without breaking the move.
 
 4. **Create the directory and stub article.** `authoring/<NN>-<slug>/article.md`,
    where `<slug>` is a short kebab-case version of the topic. Use this frontmatter
